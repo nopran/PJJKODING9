@@ -100,6 +100,9 @@ h2.title{margin:0 0 6px;font-size:1.35rem;font-weight:700}
 .tbl{width:100%;border-collapse:collapse;font-size:.85rem;margin:10px 0}
 .tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 .tbl th{background:#eef2ff;color:#3730a3}
+.table-scroll{max-width:100%;overflow-x:auto;margin:10px 0;border-radius:10px}
+.table-scroll .tbl{margin:0}
+.table-tip{display:none}
 .kuis{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:18px;padding:16px;margin-bottom:26px}
 .kuis h4{margin:0 0 4px}
 .kuis .score{font-size:.82rem;font-weight:600;color:var(--mute);margin-bottom:8px}
@@ -163,11 +166,56 @@ h2.title{margin:0 0 6px;font-size:1.35rem;font-weight:700}
 .kasus .res{margin-top:8px;font-size:.86rem;font-weight:600;display:none}
 
 
-/* simulasi detektif artefak */
-#art-svg{display:block;width:100%;max-width:420px;margin:10px auto 0;border-radius:14px;border:2px solid var(--line);background:#fff}
-#art-svg .hs{fill:transparent;cursor:pointer}
-#art-svg .hs:hover{fill:rgba(79,70,229,.14)}
-#art-svg .hs.found{stroke:#10b981;stroke-width:3;stroke-dasharray:5 3;fill:rgba(16,185,129,.14)}
+
+/* ---------- LATIHAN TERPANDU ---------- */
+button:focus-visible,a:focus-visible,.opt:has(input:focus-visible){outline:3px solid #0891b2;outline-offset:4px}
+.sim{scroll-margin-top:20px}
+.sim h4{padding-right:0;margin-top:8px;font-size:1.08rem}
+.sim .done-mark{position:static;float:right;margin-bottom:8px}
+.sim-kicker{font-size:.74rem;font-weight:700;letter-spacing:.05em;color:var(--mute);margin:0 0 4px}
+.sim-guide{background:#eef2ff;border-radius:12px;padding:12px 14px;margin:12px 0;font-size:.88rem}
+.sim-guide p{margin:0 0 6px}.sim-guide ol{margin:0;padding-left:20px}.sim-guide li{margin:4px 0}
+.sim-path{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+.sim-path span{font-size:.78rem;border:1px solid var(--line);background:#fff;padding:6px 10px;border-radius:9px}
+.sim-path .finished{background:#ecfdf5;border-color:#6ee7b7;color:#065f46}
+.sim-progress{font-weight:700;font-size:.86rem;color:#4338ca;margin:12px 0 8px}
+.sim-task{padding:16px;border:1px solid #c7d2fe;border-radius:14px;background:#fff}
+.sim-task p{margin:0 0 10px;font-size:.9rem}
+.prompt-paper{background:#f1f5f9;border-left:4px solid #94a3b8;border-radius:8px;padding:12px;font-size:.9rem;margin:10px 0}
+.prompt-paper.safe{background:#ecfdf5;border-color:#10b981}
+.choice-row{display:flex;gap:10px;flex-wrap:wrap}
+.action-btn{flex:1;min-width:150px;background:#fff;color:#3730a3;border:2px solid #c7d2fe;border-radius:12px;padding:12px;font:600 .88rem 'Poppins',sans-serif;cursor:pointer;line-height:1.5}
+.action-btn:hover:not(:disabled){background:#eef2ff;border-color:var(--p)}
+.action-btn:disabled{background:#f1f5f9;border-color:var(--line);color:#64748b;cursor:default}
+.action-btn.picked{background:#ecfdf5;border-color:#34d399;color:#065f46}
+.sim-feedback{font-size:.88rem;padding:12px 14px;border-radius:10px;margin-top:12px;background:#eff6ff;color:#1e40af}
+.sim-feedback:empty{display:none}.sim-feedback.success{background:#ecfdf5;color:#065f46}.sim-feedback.retry{background:#fffbeb;color:#92400e}
+.sim-next{display:inline-block;margin-top:12px;font-size:.88rem;font-weight:600;color:var(--p);text-underline-offset:3px}
+.dataset-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.dataset-card{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.dataset-card h5{font-size:1rem;margin:0 0 8px}.dataset-card p{margin:5px 0;font-size:.85rem}
+.dataset-strip{display:flex;gap:3px;margin:10px 0;height:15px}.dataset-strip i{flex:1;background:#4f46e5;border-radius:3px}.dataset-strip i.paper{background:#0891b2}
+.dataset-legend{font-size:.8rem;color:var(--mute)}
+.dataset-legend b{color:#4338ca}.dataset-legend em{color:#0e7490;font-style:normal;font-weight:700}
+.dataset-card .action-btn{width:100%;min-width:0;margin-top:10px}
+.sim-note{font-size:.79rem;color:#475569;line-height:1.6;margin:10px 0}
+.test-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:12px 0}
+.test-table caption{text-align:left;font-weight:700;padding:8px 0;color:var(--ink)}
+.test-table th,.test-table td{padding:9px 7px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.test-table th{background:#eef2ff;color:#3730a3}.test-table td.hit{color:#047857}.test-table td.miss{color:#b45309;background:#fffbeb}
+.test-table tfoot td{font-weight:700;background:#f8fafc}.test-table th:first-child{width:40%}
+.sim-decision{min-width:0;border:1px solid var(--line);border-radius:14px;padding:14px;margin:14px 0 0}
+.sim-decision legend{font-size:.94rem;font-weight:700;padding:0 5px}.sim-decision .opt{font-size:.86rem;padding:10px}
+.sim-decision[disabled]{opacity:.65}.sim-decision .btn-mini{margin-top:10px}
+.viral-message{background:#f0fdfa;border:1px solid #99f6e4;border-radius:14px;padding:16px;margin:12px 0}
+.viral-message .source{font-size:.76rem;color:#475569;margin:0 0 8px}.viral-message blockquote{margin:0;font-weight:600;font-size:.93rem}
+.evidence-list{display:grid;gap:10px;margin-top:12px}.evidence-item{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.evidence-item button{width:100%;border:0;text-align:left;background:#f8faff;color:#3730a3;padding:13px;font:600 .88rem 'Poppins',sans-serif;cursor:pointer}
+.evidence-item button[aria-expanded=true]{background:#eef2ff}.evidence-detail{padding:12px 14px;font-size:.86rem}.evidence-detail p{margin:0 0 7px}.evidence-detail p:last-child{margin:0}
+.evidence-date{display:inline-block;background:#f1f5f9;padding:3px 7px;border-radius:6px;font-size:.78rem;font-weight:600;margin-bottom:7px}
+[hidden]{display:none!important}
+@media(max-width:600px){.sim{padding:15px}.dataset-grid{grid-template-columns:1fr}.sim-path span{flex:1;font-size:.73rem}.test-table{font-size:.8rem}.test-table th,.test-table td{padding:8px 4px}.sim-task{padding:12px}.choice-row{flex-direction:column}.sim .done-mark{font-size:.7rem}.sim-decision{padding:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 
 /* ---------- UJIAN ---------- */
 .exam-bar{position:sticky;top:8px;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-radius:14px;background:#fff;border:2px solid #fcd34d;box-shadow:0 6px 18px rgba(0,0,0,.1);margin-bottom:14px;font-weight:700}
@@ -232,6 +280,8 @@ body.shield .container *{pointer-events:none}
 }
 @media (max-width:600px){
   .card{padding:18px;border-radius:18px}
+  .table-scroll .tbl{min-width:460px}
+  .materi .table-tip{display:block;font-size:.76rem;color:#4338ca;margin:10px 0 4px}
   header h1{font-size:1.25rem}
   #floating-cam{width:92px;height:70px;bottom:10px;right:10px}
   #cam-label{bottom:84px;right:14px}
@@ -242,13 +292,13 @@ body.shield .container *{pointer-events:none}
 <body>
 
 <header>
-  <span class="badge-ai">🤖 KECERDASAN ARTIFISIAL</span>
+  <span class="badge-ai">ðŸ¤– KECERDASAN ARTIFISIAL</span>
   <h1>PJJ Koding dan KA Kelas IX</h1>
-  <p>MTsN 6 Pesisir Selatan • Belajar Cerdas, Jujur, dan Kritis</p>
+  <p>MTsN 6 Pesisir Selatan â€¢ Belajar Cerdas, Jujur, dan Kritis</p>
 </header>
 
 <video id="floating-cam" autoplay playsinline muted></video>
-<div id="cam-label">● PENGAWASAN</div>
+<div id="cam-label">â— PENGAWASAN</div>
 <canvas id="confetti"></canvas>
 <div id="wm"></div>
 
@@ -263,7 +313,7 @@ body.shield .container *{pointer-events:none}
   <div class="card" id="hud">
     <div class="row">
       <div id="student-info"></div>
-      <div class="chip" id="xp-chip">⭐ 0 XP • Pemula</div>
+      <div class="chip" id="xp-chip">â­ 0 XP â€¢ Pemula</div>
     </div>
     <div class="stepper" id="stepper">
       <div data-s="step-login"><i></i>Presensi</div>
@@ -282,7 +332,7 @@ body.shield .container *{pointer-events:none}
       <p class="sub">Baca tata tertib, aktifkan kamera, lalu isi data dirimu.</p>
 
       <div class="rules">
-        <h3>⚠️ Tata Tertib PJJ Koding dan KA</h3>
+        <h3>âš ï¸ Tata Tertib PJJ Koding dan KA</h3>
         <ol>
           <li>Wajib <b>membaca dan mencatat (meringkas)</b> materi di <b>buku catatan</b> selama <b>30 menit</b>. Waktu hanya berjalan saat halaman ini terbuka. Siapkan buku dan alat tulis sebelum mulai.</li>
           <li>Wajib menjawab seluruh kuis materi dan mencoba <b>seluruh simulasi</b> sebelum Ujian Akhir. Kuis materi dinyatakan <b>tuntas</b> jika kelima soal benar dalam satu percobaan; bila ada yang salah, kuis <b>diulang dari awal</b> dengan soal dan pilihan yang diacak.</li>
@@ -293,7 +343,7 @@ body.shield .container *{pointer-events:none}
         </ol>
       </div>
 
-      <button class="btn" id="btn-kamera" onclick="aktifkanKamera()">📷 1. Aktifkan Kamera Pengawas (Wajib)</button>
+      <button class="btn" id="btn-kamera" onclick="aktifkanKamera()">ðŸ“· 1. Aktifkan Kamera Pengawas (Wajib)</button>
 
       <div id="form-data-diri" style="display:none;margin-top:18px">
         <div class="field"><label>Nama Lengkap</label><input type="text" id="nama-siswa" placeholder="Masukkan nama lengkapmu" autocomplete="off"></div>
@@ -304,7 +354,7 @@ body.shield .container *{pointer-events:none}
             <option value="IXc">IX c</option><option value="IXd">IX d</option>
           </select>
         </div>
-        <button class="btn green" onclick="mulaiApersepsi()">🚀 2. Saya Setuju Tata Tertib & Mulai Belajar</button>
+        <button class="btn green" onclick="mulaiApersepsi()">ðŸš€ 2. Saya Setuju Tata Tertib & Mulai Belajar</button>
       </div>
     </div>
 
@@ -313,7 +363,7 @@ body.shield .container *{pointer-events:none}
       <h2 class="title">Apersepsi: Seberapa Tahu Kamu?</h2>
       <p class="sub">Jawab 10 pertanyaan sesuai pengetahuan awalmu. Tidak dinilai, tapi dapat <b>+10 XP</b>!</p>
       <div id="diag-container"></div>
-      <button class="btn" onclick="lanjutMateri()">Kirim Jawaban & Mulai Belajar ➔</button>
+      <button class="btn" onclick="lanjutMateri()">Kirim Jawaban & Mulai Belajar âž”</button>
     </div>
 
     <!-- 3. MATERI -->
@@ -323,18 +373,18 @@ body.shield .container *{pointer-events:none}
         <div class="progress-wrap"><i id="timer-bar"></i></div>
       </div>
 
-      <h2 class="title" style="text-align:center">📖 Modul Kecerdasan Artifisial Kelas IX</h2>
+      <h2 class="title" style="text-align:center">ðŸ“– Modul Kecerdasan Artifisial Kelas IX</h2>
       <p class="sub" style="text-align:center">Baca dan catat dengan saksama, lalu jawab kuis di tiap bagian. Setiap soal yang benar = <b>+10 XP</b>.</p>
       <div class="petunjuk">
-        <h3>📋 PETUNJUK BELAJAR — Baca dulu sebelum mulai!</h3>
+        <h3>ðŸ“‹ PETUNJUK BELAJAR â€” Baca dulu sebelum mulai!</h3>
         <ol>
           <li><b>Siapkan buku catatan dan alat tulis.</b> Tulis <b>nama dan kelas</b> di halaman pertama. Catatan ini bisa diperiksa guru, jadi simpan dengan baik.</li>
-          <li><b>Baca materi secara berurutan</b> (Bagian A ➔ B ➔ C). <b>Sambil membaca, kamu WAJIB mencatat (meringkas)</b> dengan bahasamu sendiri, bukan menyalin kata per kata. Catat minimal: <b>pengertian, ciri/perbedaan, dan contoh</b>. Boleh berbentuk poin, tabel, atau peta konsep.</li>
+          <li><b>Baca materi secara berurutan</b> (Bagian A âž” B âž” C). <b>Sambil membaca, kamu WAJIB mencatat (meringkas)</b> dengan bahasamu sendiri, bukan menyalin kata per kata. Catat minimal: <b>pengertian, ciri/perbedaan, dan contoh</b>. Boleh berbentuk poin, tabel, atau peta konsep.</li>
           <li><b>Pengatur waktu 30 menit</b> ada di atas layar. Waktu hanya berjalan saat halaman ini terbuka, dan berhenti jika kamu pindah tab/aplikasi.</li>
           <li><b>Kerjakan kuis di akhir tiap bagian</b> setelah selesai mencatat bagian tersebut. Tiap kuis berisi <b>5 soal</b>. Jika <b>ada satu saja yang salah</b>, jawaban benar <u>tidak ditampilkan</u> dan kuis <b>diulang dari soal pertama</b> dengan urutan soal dan pilihan jawaban <b>diacak</b>. Jadi pahami isinya, jangan menghafal letak jawaban. Baca ulang materi dan catatanmu sebelum mengulang. Jumlah percobaan tidak dibatasi.</li>
-          <li><b>Tombol "Selesaikan Materi" aktif</b> jika: ⏳ waktu 30 menit habis, ✍️ catatan sudah dibuat (centang di bagian bawah), dan 📝 kuis A, B, C sudah tuntas.</li>
+          <li><b>Tombol "Selesaikan Materi" aktif</b> jika: â³ waktu 30 menit habis, âœï¸ catatan sudah dibuat (centang di bagian bawah), dan ðŸ“ kuis A, B, C sudah tuntas.</li>
         </ol>
-        <div class="contoh-catatan"><b>Contoh catatan Bagian A:</b> (1) Data = bahan baku KA; kualitas data menentukan kualitas hasil (garbage in, garbage out). (2) Ciri data berkualitas: akurat, lengkap, konsisten, relevan, terkini, seimbang. (3) Contoh: data latih wajah didominasi satu kelompok ➔ KA bias dan kurang adil.</div>
+        <div class="contoh-catatan"><b>Contoh catatan Bagian A:</b> (1) Data = bahan baku KA; kualitas data menentukan kualitas hasil (garbage in, garbage out). (2) Ciri data berkualitas: akurat, lengkap, konsisten, relevan, terkini, seimbang. (3) Contoh: data latih wajah didominasi satu kelompok âž” KA bias dan kurang adil.</div>
       </div>
 
       <div class="materi"><span class="tag">BAGIAN A</span>
@@ -350,33 +400,38 @@ body.shield .container *{pointer-events:none}
           <li><b>Terkini:</b> mencerminkan keadaan sekarang, bukan data usang.</li>
           <li><b>Seimbang (representatif):</b> mewakili semua kelompok, tidak didominasi satu jenis saja.</li>
         </ul>
-        <table class="tbl">
+        <p class="table-tip">Geser tabel ke samping untuk melihat semua kolom â†’</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Tabel materi, dapat digeser ke samping"><table class="tbl">
           <tr><th>Masalah pada data</th><th>Contoh</th><th>Dampak pada KA</th></tr>
           <tr><td>Data kosong</td><td>Kolom suhu tidak terisi pada banyak baris</td><td>KA kehilangan informasi, prediksi kurang tepat</td></tr>
-          <tr><td>Data salah / pencilan</td><td>Suhu kelas tercatat 900°C karena sensor rusak</td><td>KA mempelajari pola yang menyimpang</td></tr>
+          <tr><td>Data salah / pencilan</td><td>Suhu kelas tercatat 900Â°C karena sensor rusak</td><td>KA mempelajari pola yang menyimpang</td></tr>
           <tr><td>Data duplikat</td><td>Satu catatan terinput berulang kali</td><td>Pola tertentu tampak lebih sering dari kenyataan</td></tr>
           <tr><td>Data tidak seimbang (bias)</td><td>90% foto latih wajah dari satu kelompok</td><td>KA kurang akurat dan tidak adil bagi kelompok lain</td></tr>
           <tr><td>Data usang / tidak relevan</td><td>Data penjualan tahun lama untuk menebak tren sekarang</td><td>Rekomendasi tidak sesuai kondisi saat ini</td></tr>
-        </table>
-        <p><b>Pembersihan data (<i>data cleaning</i>)</b> adalah proses memperbaiki kualitas data sebelum dipakai KA: memeriksa data, menghapus duplikat, melengkapi yang kosong, memperbaiki atau menghapus pencilan, menyeragamkan format, dan menyeimbangkan data antar kelompok.</p>
+        </table></div>
+        <p><b>Pembersihan data (<i>data cleaning</i>)</b> adalah proses memperbaiki kualitas data sebelum dipakai KA: memeriksa data, menghapus duplikat, melengkapi yang kosong, memperbaiki atau menghapus pencilan, menyeragamkan format, dan menyeimbangkan data antar kelompok. Periksa catatan sumber sebelum mengisi data kosong; <b>kosong tidak otomatis berarti nol</b>.</p>
+        <div class="callout"><b>Bagaimana mengecek hasilnya?</b> Uji dua model pada <b>contoh baru yang sama</b>, bukan hanya contoh yang dipakai saat latihan. Bandingkan jumlah jawaban benar <b>untuk tiap kelompok</b>. Nilai keseluruhan yang tinggi bisa menyembunyikan kelemahan pada kelompok tertentu.</div>
       </div>
-      <div class="kuis"><h4>📝 Kuis Bagian A</h4><div class="kuis-info"><b class="t">ℹ️ Keterangan Kuis</b><ul><li>5 soal pilihan ganda, tiap soal hanya 1 jawaban benar. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>✍️ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qa">Soal 1 / 5</div><div id="kuis-a-container"></div></div>
+      <div class="kuis"><h4>ðŸ“ Kuis Bagian A</h4><div class="kuis-info"><b class="t">â„¹ï¸ Keterangan Kuis</b><ul><li>5 soal cerita singkat. Gunakan petunjuk dalam cerita; tiap soal hanya 1 jawaban paling tepat. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>âœï¸ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qa">Soal 1 / 5</div><div id="kuis-a-container"></div></div>
 
       <div class="materi"><span class="tag">BAGIAN B</span>
         <h4>Keamanan Data dalam Pemanfaatan KA</h4>
         <p>Saat memakai KA (misalnya chatbot, aplikasi edit foto, atau asisten suara), kita sering memasukkan data. Data itu bisa <b>disimpan</b>, <b>dipakai untuk melatih model</b>, atau <b>bocor</b> jika akun atau sistemnya diretas, lalu disalahgunakan untuk penipuan atau pencurian identitas.</p>
         <p><b>Data pribadi</b> adalah data yang dapat mengenali seseorang. Menurut UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi, pemilik data berhak atas perlindungan datanya.</p>
-        <table class="tbl">
+        <p class="table-tip">Geser tabel ke samping untuk melihat semua kolom â†’</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Tabel materi, dapat digeser ke samping"><table class="tbl">
           <tr><th>Jenis data</th><th>Contoh</th><th>Boleh dimasukkan ke KA?</th></tr>
           <tr><td>Data umum / publik</td><td>Pertanyaan pelajaran, teks berita, ide cerita</td><td>Aman</td></tr>
           <tr><td>Data pribadi</td><td>Nama lengkap, alamat, nomor HP, NIK, tanggal lahir</td><td>Hindari; samarkan lebih dulu</td></tr>
           <tr><td>Data sensitif</td><td>Foto wajah, foto KTP, sidik jari, data kesehatan, lokasi real-time, nomor rekening</td><td>Jangan</td></tr>
           <tr><td>Rahasia akses</td><td>Kata sandi, kode OTP, PIN</td><td>Jangan kepada siapa pun</td></tr>
-        </table>
+        </table></div>
         <p><b>Langkah menjaga keamanan data saat memakai KA:</b></p>
         <ul>
           <li><b>Samarkan data:</b> ganti identitas asli dengan tanda seperti [NAMA] atau [ALAMAT], lalu isi sendiri pada dokumen akhir.</li>
+          <li><b>Kirim seperlunya:</b> untuk menghitung rata-rata durasi, cukup kirim angka durasinya; nama, alamat, dan nomor siswa tidak diperlukan.</li>
           <li><b>Pakai kata sandi kuat dan unik</b> (panjang, kombinasi huruf, angka, simbol) serta aktifkan <b>verifikasi dua langkah</b>.</li>
+          <li><b>Komputer bersama:</b> hindari menyimpan kata sandi dan selalu keluar dari akun setelah selesai. Menutup tab saja belum tentu mengakhiri sesi.</li>
           <li><b>Batasi izin aplikasi:</b> hanya beri izin yang memang dibutuhkan dan baca kebijakan privasinya.</li>
           <li><b>Waspada phishing:</b> jangan klik tautan mencurigakan atau memasukkan kata sandi di halaman yang tidak resmi.</li>
           <li><b>Hormati data orang lain:</b> minta izin sebelum mengunggah foto atau data temanmu.</li>
@@ -384,19 +439,21 @@ body.shield .container *{pointer-events:none}
         </ul>
         <div class="callout"><b>Ingat:</b> jika ragu, anggap apa pun yang kamu ketik ke KA bisa dibaca orang lain. Lebih baik tidak dimasukkan.</div>
       </div>
-      <div class="kuis"><h4>📝 Kuis Bagian B</h4><div class="kuis-info"><b class="t">ℹ️ Keterangan Kuis</b><ul><li>5 soal pilihan ganda, tiap soal hanya 1 jawaban benar. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>✍️ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qb">Soal 1 / 5</div><div id="kuis-b-container"></div></div>
+      <div class="kuis"><h4>ðŸ“ Kuis Bagian B</h4><div class="kuis-info"><b class="t">â„¹ï¸ Keterangan Kuis</b><ul><li>5 soal cerita singkat. Gunakan petunjuk dalam cerita; tiap soal hanya 1 jawaban paling tepat. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>âœï¸ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qb">Soal 1 / 5</div><div id="kuis-b-container"></div></div>
 
       <div class="materi"><span class="tag">BAGIAN C</span>
         <h4>Analisis Artefak Hasil KA</h4>
         <p><b>Artefak hasil KA</b> adalah keluaran yang dibuat KA, berupa teks, gambar, audio, atau video. KA generatif kini dapat membuat konten yang sangat meyakinkan. <b>Deep fake</b> adalah gambar, audio, atau video rekayasa KA yang meniru wajah atau suara orang nyata sehingga tampak asli.</p>
         <p><b>Bahaya deep fake:</b> hoaks dan disinformasi, penipuan (misalnya suara keluarga palsu yang meminta uang), pencemaran nama baik, dan perundungan.</p>
-        <table class="tbl">
-          <tr><th>Jenis artefak</th><th>Yang diamati</th></tr>
-          <tr><td>🖼️ Gambar</td><td>Jari atau tangan janggal, tepi wajah/rambut buram, anting atau kacamata tidak serasi, arah bayangan tidak konsisten, teks pada papan berupa huruf acak</td></tr>
-          <tr><td>🎞️ Video</td><td>Kedipan mata kurang alami, gerak bibir tidak sinkron dengan suara, wajah bergetar di tepi, pencahayaan wajah berbeda dari latar</td></tr>
-          <tr><td>🔊 Audio</td><td>Intonasi datar atau aneh, jeda dan napas tidak wajar, suara terlalu bersih tanpa derau latar, logat tidak sesuai</td></tr>
-          <tr><td>📄 Teks</td><td>Fakta atau sumber yang dikarang (halusinasi), gaya bahasa terlalu seragam, tidak ada rujukan yang bisa dicek</td></tr>
-        </table>
+        <p class="table-tip">Geser tabel ke samping untuk melihat semua kolom â†’</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Tabel materi, dapat digeser ke samping"><table class="tbl">
+          <tr><th>Jenis artefak</th><th>Petunjuk awal yang perlu dicek</th></tr>
+          <tr><td>ðŸ–¼ï¸ Gambar</td><td>Jari atau tangan janggal, tepi wajah/rambut buram, anting atau kacamata tidak serasi, arah bayangan tidak konsisten, teks pada papan berupa huruf acak</td></tr>
+          <tr><td>ðŸŽžï¸ Video</td><td>Kedipan mata kurang alami, gerak bibir tidak sinkron dengan suara, wajah bergetar di tepi, pencahayaan wajah berbeda dari latar</td></tr>
+          <tr><td>ðŸ”Š Audio</td><td>Intonasi datar atau aneh, jeda dan napas tidak wajar, suara terlalu bersih tanpa derau latar, logat tidak sesuai</td></tr>
+          <tr><td>ðŸ“„ Teks</td><td>Fakta atau sumber yang dikarang (halusinasi), gaya bahasa terlalu seragam, tidak ada rujukan yang bisa dicek</td></tr>
+        </table></div>
+        <div class="callout"><b>Petunjuk bukan bukti pasti:</b> gambar buram, suara datar, atau detail yang tidak serasi juga dapat muncul pada konten asli. Jangan menyimpulkan konten buatan KA hanya dari tampilannya. Periksa sumber, tanggal, dan konteksnya.</div>
         <p><b>Langkah menganalisis artefak:</b></p>
         <ul>
           <li><b>1. Jeda:</b> jangan langsung percaya atau membagikan, terutama jika isinya mengejutkan atau memancing emosi.</li>
@@ -406,17 +463,17 @@ body.shield .container *{pointer-events:none}
         </ul>
         <div class="callout"><b>Waspada:</b> alat pendeteksi deep fake hanyalah alat bantu dan tidak selalu akurat. KA makin canggih sehingga tanda visual bisa hilang. Karena itu, <b>sumber dan konteks</b> lebih dapat diandalkan daripada hanya menilai tampilan.</div>
       </div>
-      <div class="kuis"><h4>📝 Kuis Bagian C</h4><div class="kuis-info"><b class="t">ℹ️ Keterangan Kuis</b><ul><li>5 soal pilihan ganda, tiap soal hanya 1 jawaban benar. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>✍️ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qc">Soal 1 / 5</div><div id="kuis-c-container"></div></div>
+      <div class="kuis"><h4>ðŸ“ Kuis Bagian C</h4><div class="kuis-info"><b class="t">â„¹ï¸ Keterangan Kuis</b><ul><li>5 soal cerita singkat. Gunakan petunjuk dalam cerita; tiap soal hanya 1 jawaban paling tepat. Pilih jawaban, lalu tekan <b>Periksa Jawaban</b>.</li><li>Jika ada <b>satu soal salah</b>, kuis <b>diulang dari soal 1</b> dengan soal dan pilihan yang <b>diacak</b>. Jawaban benar tidak diperlihatkan, hanya petunjuk bagian materi yang perlu dibaca ulang.</li><li>Kuis <b>tuntas</b> jika kelima soal benar dalam satu percobaan. Setiap soal memberi <b>+10 XP</b> (sekali saja).</li><li>âœï¸ Pastikan catatan bagian ini sudah kamu buat sebelum mengerjakan.</li></ul></div><div class="score" id="skor-qc">Soal 1 / 5</div><div id="kuis-c-container"></div></div>
 
-      <label class="opt" style="margin-top:20px"><input type="checkbox" id="cek-catatan" onchange="cekTombolMateri()"><span class="dot" style="border-radius:6px"></span><span>✍️ Saya sudah <b>membaca dan mencatat (meringkas)</b> ketiga bagian materi di buku catatan.</span></label>
-      <button class="btn green" id="btn-lanjut-simulasi" disabled onclick="kumpulkanSemuaKuis()">Selesaikan Materi & Lanjut Simulasi ➔</button>
+      <label class="opt" style="margin-top:20px"><input type="checkbox" id="cek-catatan" onchange="cekTombolMateri()"><span class="dot" style="border-radius:6px"></span><span>âœï¸ Saya sudah <b>membaca dan mencatat (meringkas)</b> ketiga bagian materi di buku catatan.</span></label>
+      <button class="btn green" id="btn-lanjut-simulasi" disabled onclick="kumpulkanSemuaKuis()">Selesaikan Materi & Lanjut Simulasi âž”</button>
       <p id="teks-tunggu-materi" style="text-align:center;color:#b45309;font-size:.85rem;font-weight:600">Tombol aktif setelah waktu selesai, catatan sudah dibuat (centang di atas), dan seluruh kuis (A, B, C) tuntas.</p>
     </div>
 
     <!-- 4. SIMULASI -->
     <div id="step-simulasi" class="step">
       <div class="locked-box" id="lock-simulasi">
-        <div class="lock">🔒</div>
+        <div class="lock">ðŸ”’</div>
         <h3 style="margin:6px 0">Simulasi Terkunci</h3>
         <p class="sub">Masukkan kode akses Simulasi dari Pak Irwan.</p>
         <input type="password" class="input" id="kode-simulasi" placeholder="Masukkan kode" style="text-align:center" onkeydown="if(event.key==='Enter')bukaSimulasi()">
@@ -425,89 +482,95 @@ body.shield .container *{pointer-events:none}
       </div>
 
       <div id="konten-simulasi" style="display:none">
-        <h2 class="title">🧪 Laboratorium Simulasi AI</h2>
-        <p class="sub">Selesaikan ketiga simulasi untuk membuka Ujian Akhir. Tiap simulasi <b>+20 XP</b>.</p>
-
-        <div class="sim" id="sim1">
-          <span class="done-mark">✔ SELESAI</span>
-          <h4>▶ Simulasi 1: Lindungi Data Pribadimu</h4>
-          <p style="font-size:.9rem">Kamu akan mengetik 4 permintaan ke chatbot KA. Tentukan: <b>aman diketik</b> atau <b>lindungi dulu</b> (samarkan / jangan dimasukkan)?</p>
-          <div id="kasus-container"></div>
-          <p id="hasil-sim1" style="font-weight:600;margin:10px 0 0;font-size:.9rem"></p>
+        <h2 class="title">ðŸ§ª Laboratorium Simulasi KA</h2>
+        <p class="sub">Baca tugas, lakukan langkahnya, lalu lihat hasilnya. Kamu boleh memperbaiki pilihan. Setiap simulasi tuntas memberi <b>+20 XP</b> sekali.</p>
+        <div class="sim-path" aria-label="Kemajuan simulasi">
+          <span id="sim-nav1">1. Amankan permintaan</span><span id="sim-nav2">2. Bandingkan data</span><span id="sim-nav3">3. Periksa kabar</span>
         </div>
+        <p class="sim-progress" id="sim-total" role="status">0 dari 3 simulasi tuntas. Mulai dari simulasi 1 di bawah.</p>
 
-        <div class="sim" id="sim2">
-          <span class="done-mark">✔ SELESAI</span>
-          <h4>▶ Simulasi 2: Kualitas Data Menentukan Kualitas KA</h4>
-          <p style="font-size:.9rem">Sebuah KA akan dilatih mengenali <b>jenis sampah</b> dari foto. Pilih dataset latih, lalu latih KA. Coba <b>ketiga</b> dataset dan bandingkan hasilnya.</p>
-          <select id="sim-data" class="input">
-            <option value="sedikit">Dataset 1: 50 foto, banyak yang buram, kosong, dan salah label</option>
-            <option value="timpang">Dataset 2: 10.000 foto, tetapi 95% hanya sampah plastik</option>
-            <option value="bersih">Dataset 3: 3.000 foto jelas, label benar, semua jenis sampah seimbang</option>
-          </select>
-          <button class="btn" onclick="simulasiData()" style="margin-top:10px">Latih KA</button>
-          <div class="bars" id="bars-data" style="display:none">
-            <div class="bar">Akurasi pada data umum<div class="track"><div class="fill" id="f-a"></div></div></div>
-            <div class="bar">Kemampuan mengenali SEMUA jenis sampah secara adil<div class="track"><div class="fill" id="f-b"></div></div></div>
+        <section class="sim" id="sim1" aria-labelledby="sim-title1">
+          <span class="done-mark">âœ” TUNTAS</span>
+          <p class="sim-kicker">PRAKTIK BAGIAN B Â· KEAMANAN DATA</p>
+          <h4 id="sim-title1">1. Amankan permintaan ke chatbot</h4>
+          <div class="sim-guide">
+            <p><b>Tugasmu:</b> periksa 4 contoh permintaan sebelum dipakai.</p>
+            <ol><li>Baca teks dalam kotak abu-abu.</li><li>Pilih <b>â€œBoleh dipakaiâ€</b> jika tidak ada data pribadi, atau <b>â€œPerlu diubahâ€</b> jika ada data yang harus dilindungi.</li><li>Lihat versi aman, lalu tekan <b>â€œKasus berikutnyaâ€</b>. Tuntas setelah 4 keputusan tepat.</li></ol>
           </div>
-          <p id="hasil-sim-data" style="font-weight:600;margin:10px 0 0;font-size:.9rem"></p>
-        </div>
+          <p class="sim-note">Semua contoh adalah rekaan. Kamu tidak perlu mengetik nama, alamat, atau kata sandi asli.</p>
+          <div id="kasus-container"></div>
+          <div id="hasil-sim1" class="sim-feedback" role="status"></div>
+          <a class="sim-next" href="#sim2" id="next-sim1" hidden>Lanjut ke simulasi 2: bandingkan data â†“</a>
+        </section>
 
-        <div class="sim" id="sim3">
-          <span class="done-mark">✔ SELESAI</span>
-          <h4>▶ Simulasi 3: Detektif Artefak, Temukan Kejanggalan</h4>
-          <p style="font-size:.9rem">Foto ini viral dengan keterangan <i>“Pengumuman: sekolah libur 30 hari!”</i> Analisis gambarnya. <b>Klik bagian yang menurutmu janggal</b> dan temukan <b>5 kejanggalan</b>. Klik bagian lain untuk membandingkan.</p>
-          <svg id="art-svg" viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Foto seorang anak memegang papan pengumuman">
-            <defs><filter id="blr"><feGaussianBlur stdDeviation="3"/></filter></defs>
-            <rect width="360" height="300" fill="#bae6fd"/>
-            <rect y="240" width="360" height="60" fill="#86efac"/>
-            <circle cx="320" cy="40" r="22" fill="#fde047"/>
-            <ellipse cx="228" cy="266" rx="52" ry="9" fill="rgba(0,0,0,.28)"/>
-            <ellipse cx="150" cy="272" rx="72" ry="60" fill="#6366f1"/>
-            <rect x="140" y="195" width="20" height="26" fill="#fcd9b6"/>
-            <circle cx="150" cy="150" r="50" fill="#fcd9b6"/>
-            <path d="M100 145 Q100 95 150 95 Q200 95 200 145 Q185 120 150 120 Q115 120 100 145Z" fill="#1f2937"/>
-            <ellipse cx="104" cy="132" rx="9" ry="22" fill="#1f2937" filter="url(#blr)"/>
-            <ellipse cx="100" cy="156" rx="6" ry="10" fill="#fcd9b6"/>
-            <ellipse cx="200" cy="156" rx="6" ry="10" fill="#fcd9b6"/>
-            <circle cx="100" cy="172" r="5" fill="#f59e0b"/>
-            <rect x="196" y="166" width="10" height="10" fill="#ef4444"/>
-            <circle cx="133" cy="150" r="4" fill="#111"/><circle cx="167" cy="150" r="4" fill="#111"/>
-            <circle cx="133" cy="150" r="12" fill="none" stroke="#111" stroke-width="2"/><circle cx="167" cy="150" r="12" fill="none" stroke="#111" stroke-width="2"/>
-            <line x1="145" y1="150" x2="155" y2="150" stroke="#111" stroke-width="2"/>
-            <path d="M138 173 Q150 183 162 173" fill="none" stroke="#9a3412" stroke-width="3" stroke-linecap="round"/>
-            <path d="M205 245 L285 225" stroke="#6366f1" stroke-width="22" stroke-linecap="round"/>
-            <line x1="285" y1="185" x2="285" y2="215" stroke="#64748b" stroke-width="4"/>
-            <rect x="225" y="110" width="120" height="75" rx="6" fill="#fff" stroke="#334155" stroke-width="3"/>
-            <text x="285" y="142" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#1e293b">SEKOLHA LIRUB</text>
-            <text x="285" y="166" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#1e293b">3O HAЯI</text>
-            <circle cx="285" cy="222" r="13" fill="#fcd9b6"/>
-            <g fill="#fcd9b6"><rect x="273" y="196" width="4" height="16" rx="2"/><rect x="278" y="196" width="4" height="16" rx="2"/><rect x="283" y="196" width="4" height="16" rx="2"/><rect x="288" y="196" width="4" height="16" rx="2"/><rect x="293" y="196" width="4" height="16" rx="2"/><rect x="298" y="196" width="4" height="16" rx="2"/></g>
-            <g class="hots">
-              <rect class="hs" data-id="jari" data-an="1" data-msg="✔ Tangan memiliki 6 jari. Ini kelemahan klasik gambar buatan KA." x="268" y="192" width="40" height="40" onclick="klikArtefak(this)"/>
-              <rect class="hs" data-id="anting" data-an="1" data-msg="✔ Antingnya berbeda bentuk (bulat dan kotak). Detail kecil sering tidak serasi pada gambar buatan KA." x="90" y="164" width="20" height="20" onclick="klikArtefak(this)"/>
-              <rect class="hs" data-id="anting" data-an="1" data-msg="✔ Antingnya berbeda bentuk (bulat dan kotak). Detail kecil sering tidak serasi pada gambar buatan KA." x="192" y="160" width="20" height="22" onclick="klikArtefak(this)"/>
-              <rect class="hs" data-id="teks" data-an="1" data-msg="✔ Tulisan pada papan berantakan dan tidak terbaca (“SEKOLHA LIRUB”). KA sering gagal membuat teks yang benar." x="225" y="110" width="120" height="75" onclick="klikArtefak(this)"/>
-              <rect class="hs" data-id="bayangan" data-an="1" data-msg="✔ Matahari ada di kanan, seharusnya bayangan jatuh ke kiri. Di sini bayangan jatuh ke kanan, jadi pencahayaannya tidak konsisten." x="180" y="254" width="100" height="26" onclick="klikArtefak(this)"/>
-              <rect class="hs" data-id="tepi" data-an="1" data-msg="✔ Tepi rambut tampak buram dan menyatu dengan latar. Ini tanda tempelan atau rekayasa." x="92" y="104" width="24" height="50" onclick="klikArtefak(this)"/>
-              <rect class="hs" data-id="wajah" data-an="0" data-msg="Bagian wajah ini tampak wajar. Perhatikan detail kecil di sekitarnya." x="118" y="128" width="64" height="58" onclick="klikArtefak(this)"/>
-              <rect class="hs" data-id="langit" data-an="0" data-msg="Matahari berada di sisi kanan atas. Ini petunjuk arah cahaya, bandingkan dengan arah bayangan." x="292" y="12" width="56" height="56" onclick="klikArtefak(this)"/>
-              <rect class="hs" data-id="baju" data-an="0" data-msg="Pakaian ini tampak wajar." x="86" y="222" width="100" height="56" onclick="klikArtefak(this)"/>
-            </g>
-          </svg>
-          <p id="art-count" style="font-weight:700;color:var(--p);margin:8px 0 2px;text-align:center">Ditemukan: 0 / 5</p>
-          <p id="art-msg" style="font-weight:600;text-align:center;min-height:1.4em;font-size:.88rem;margin:4px 0"></p>
-          <p id="hasil-art" style="font-weight:700;color:#047857;display:none;margin:8px 0 0;font-size:.9rem"></p>
-        </div>
+        <section class="sim" id="sim2" aria-labelledby="sim-title2">
+          <span class="done-mark">âœ” TUNTAS</span>
+          <p class="sim-kicker">PRAKTIK BAGIAN A Â· KUALITAS DATA</p>
+          <h4 id="sim-title2">2. Model mana lebih merata?</h4>
+          <div class="sim-guide"><p><b>Tugasmu:</b> bandingkan dua model pemilah plastik dan kertas.</p>
+            <ol><li>Tekan <b>â€œUji model Aâ€</b>. Baca hasil di kolom A.</li><li>Tekan <b>â€œUji model Bâ€</b>. Bandingkan kedua kolom.</li><li>Lihat jumlah benar untuk setiap jenis, lalu pilih simpulan.</li></ol>
+          </div>
+          <p class="sim-note">Kedua model belajar dari <b>10 foto yang jelas dan berlabel benar</b>. Perbedaannya hanya jumlah contoh tiap jenis. Keduanya diuji pada <b>10 benda yang sama: 5 plastik dan 5 kertas</b>.</p>
+          <div class="dataset-grid">
+            <div class="dataset-card"><h5>Model A Â· Data tidak seimbang</h5><p><b>8 foto plastik + 2 foto kertas</b></p>
+              <div class="dataset-strip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="paper"></i><i class="paper"></i></div>
+              <p>Contoh plastik lebih sering muncul saat belajar.</p><button class="action-btn" id="run-data-a" onclick="ujiModel('a')">1. Uji model A</button>
+            </div>
+            <div class="dataset-card"><h5>Model B Â· Data seimbang</h5><p><b>5 foto plastik + 5 foto kertas</b></p>
+              <div class="dataset-strip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i class="paper"></i><i class="paper"></i><i class="paper"></i><i class="paper"></i><i class="paper"></i></div>
+              <p>Kedua jenis mendapat jumlah contoh yang sama.</p><button class="action-btn" id="run-data-b" onclick="ujiModel('b')" disabled>2. Uji model B (setelah A)</button>
+            </div>
+          </div>
+          <p class="dataset-legend"><b>Ungu = contoh plastik</b> Â· <em>Biru = contoh kertas</em></p>
+          <p class="sim-progress" id="data-progress" role="status">Langkah 1 dari 3: tekan â€œUji model Aâ€.</p>
+          <table class="test-table"><caption>Hasil uji pada benda yang sama</caption>
+            <thead><tr><th scope="col">Benda uji<br><small>(jenis sebenarnya)</small></th><th scope="col">Jawaban A</th><th scope="col">Jawaban B</th></tr></thead>
+            <tbody id="data-test-body"></tbody><tfoot id="data-test-summary"></tfoot>
+          </table>
+          <p class="sim-note">âœ“ = jawaban model sesuai jenis benda. âœ— = jawaban model keliru.<br>Ini ilustrasi dengan hasil uji yang sudah disiapkan, bukan pelatihan KA sungguhan. Data seimbang membantu, tetapi tidak menjamin semua jawaban benar.</p>
+          <fieldset class="sim-decision" id="data-decision" disabled><legend>Langkah 3 Â· Simpulan dari hasil uji</legend>
+            <p style="font-size:.88rem;margin-top:0">Model mana yang hasilnya lebih merata untuk kedua jenis pada uji ini?</p>
+            <label class="opt"><input type="radio" name="data-conclusion" value="a"><span class="dot"></span><span>A, karena benar lebih banyak pada kedua jenis.</span></label>
+            <label class="opt"><input type="radio" name="data-conclusion" value="b"><span class="dot"></span><span>B, karena benar sama banyak pada kedua jenis.</span></label>
+            <label class="opt"><input type="radio" name="data-conclusion" value="same"><span class="dot"></span><span>Keduanya, karena hasil tiap jenis sama persis.</span></label>
+            <button class="btn-mini" id="check-data" onclick="simpulkanData()">Periksa simpulan</button>
+          </fieldset>
+          <div class="sim-feedback" id="hasil-sim-data" role="status"></div>
+          <a class="sim-next" href="#sim3" id="next-sim2" hidden>Lanjut ke simulasi 3: periksa kabar â†“</a>
+        </section>
 
-        <button class="btn" id="btn-lanjut-formatif" disabled onclick="lanjutFormatifLock()">🔒 Ujian Akhir Terkunci (selesaikan 3 simulasi)</button>
+        <section class="sim" id="sim3" aria-labelledby="sim-title3">
+          <span class="done-mark">âœ” TUNTAS</span>
+          <p class="sim-kicker">PRAKTIK BAGIAN C Â· SUMBER DAN KONTEKS</p>
+          <h4 id="sim-title3">3. Periksa kabar sebelum meneruskan</h4>
+          <div class="sim-guide"><p><b>Tugasmu:</b> tentukan tindakan setelah menerima kabar libur.</p>
+            <ol><li>Baca pesan latihan di bawah. Tahan dulu, jangan diteruskan.</li><li>Buka <b>ketiga tombol bukti</b>. Bandingkan sumber dan tahunnya.</li><li>Pilih keputusan yang didukung bukti, lalu periksa.</li></ol>
+          </div>
+          <p class="sim-note">Sekolah, pesan, dan pengumuman di sini adalah rekaan untuk latihan.</p>
+          <div class="viral-message"><p class="source">PESAN GRUP Â· DITERIMA 21 OKTOBER 2026</p><blockquote>â€œBesok, 22 Oktober 2026, sekolah libur! Lihat poster berlogo sekolah ini. Teruskan ke teman sekelas!â€</blockquote><p style="font-size:.85rem;margin-bottom:0">Poster terlihat rapi. Tanggal penerbitannya tidak terlihat pada potongan gambar.</p></div>
+          <p class="sim-progress" id="evidence-progress" role="status">0 dari 3 bukti diperiksa. Tekan tiap tombol di bawah.</p>
+          <div class="evidence-list">
+            <div class="evidence-item"><button id="evidence-btn0" aria-expanded="false" aria-controls="evidence0" onclick="bukaBukti(0)">1. Periksa asal kiriman <span id="evidence-mark0">Â· belum dibuka</span></button><div class="evidence-detail" id="evidence0" hidden><p><b>Asal pesan:</b> diteruskan seorang anggota grup, tanpa tautan pengumuman resmi.</p><p>Logo dan tampilan rapi belum membuktikan bahwa kabar berlaku untuk besok.</p></div></div>
+            <div class="evidence-item"><button id="evidence-btn1" aria-expanded="false" aria-controls="evidence1" onclick="bukaBukti(1)">2. Lihat poster utuh di arsip <span id="evidence-mark1">Â· belum dibuka</span></button><div class="evidence-detail" id="evidence1" hidden><span class="evidence-date">ARSIP SEKOLAH Â· 21 OKTOBER 2025</span><p><b>Isi poster asli:</b> kegiatan belajar diliburkan pada <b>22 Oktober 2025</b> untuk perawatan gedung.</p><p>Poster ini berasal dari tahun lalu. Tahun pada pesan grup sudah berbeda.</p></div></div>
+            <div class="evidence-item"><button id="evidence-btn2" aria-expanded="false" aria-controls="evidence2" onclick="bukaBukti(2)">3. Baca pengumuman terbaru <span id="evidence-mark2">Â· belum dibuka</span></button><div class="evidence-detail" id="evidence2" hidden><span class="evidence-date">KANAL RESMI SEKOLAH Â· 21 OKTOBER 2026</span><p><b>Pengumuman terbaru:</b> kegiatan belajar pada <b>22 Oktober 2026 tetap berlangsung seperti biasa</b>. Tidak ada libur tambahan.</p><p>Pengumuman ini membahas tanggal yang disebut dalam pesan grup.</p></div></div>
+          </div>
+          <fieldset class="sim-decision" id="news-decision" disabled><legend>Keputusanmu setelah memeriksa bukti</legend>
+            <label class="opt"><input type="radio" name="news-conclusion" value="share"><span class="dot"></span><span>Teruskan pesan; logo sekolah menjadi bukti utama.</span></label>
+            <label class="opt"><input type="radio" name="news-conclusion" value="edit"><span class="dot"></span><span>Ubah tahun poster; gunakan kembali kabar lama.</span></label>
+            <label class="opt"><input type="radio" name="news-conclusion" value="hold"><span class="dot"></span><span>Tahan pesan; ikuti pengumuman resmi terbaru.</span></label>
+            <button class="btn-mini" id="check-news" onclick="putuskanKabar()">Periksa keputusan</button>
+          </fieldset>
+          <div class="sim-feedback" id="hasil-kabar" role="status"></div>
+        </section>
+
+        <button class="btn" id="btn-lanjut-formatif" disabled onclick="lanjutFormatifLock()">ðŸ”’ Selesaikan 3 simulasi untuk membuka ujian</button>
       </div>
     </div>
 
     <!-- 5. UJIAN -->
     <div id="step-formatif" class="step">
       <div class="locked-box" id="lock-formatif">
-        <div class="lock">🔐</div>
+        <div class="lock">ðŸ”</div>
         <h3 style="margin:6px 0">Ujian Akhir Terkunci</h3>
         <p class="sub">Masukkan kode akses ujian. Siapkan dirimu, waktu 30 menit!</p>
         <input type="password" class="input" id="kode-formatif" placeholder="Masukkan kode" style="text-align:center" onkeydown="if(event.key==='Enter')bukaFormatif()">
@@ -516,15 +579,16 @@ body.shield .container *{pointer-events:none}
       </div>
 
       <div id="konten-formatif" style="display:none">
-        <div class="exam-bar"><span class="t" id="timer-ujian">⏱ 30:00</span><span class="c" id="jml-terjawab">0 / 25 terjawab</span><span class="c" id="info-pelanggaran">⚠ 0/3</span></div>
+        <div class="exam-bar"><span class="t" id="timer-ujian">â± 30:00</span><span class="c" id="jml-terjawab">0 / 25 terjawab</span><span class="c" id="info-pelanggaran">âš  0/3</span></div>
         <p class="warn-title"><b>DILARANG keluar browser / pindah tab / copy-paste!</b></p>
+        <div class="kuis-info"><b>Petunjuk tes akhir:</b> 25 soal cerita singkat. Perhatikan bukti, tujuan, dan batasan pada tiap kasus. Pilih satu tindakan atau simpulan yang paling tepat.</div>
         <div id="formatif-container"></div>
-        <button class="btn green" onclick="konfirmasiKumpul()">Kumpulkan & Cek KKM ✅</button>
+        <button class="btn green" onclick="konfirmasiKumpul()">Kumpulkan & Cek KKM âœ…</button>
       </div>
 
       <div id="hasil-akhir" style="display:none">
         <div class="rapor" id="rapor-box">
-          <h2 id="rapor-judul">🎓 Rapor PJJ Koding dan KA</h2>
+          <h2 id="rapor-judul">ðŸŽ“ Rapor PJJ Koding dan KA</h2>
           <h3 id="cetak-nama" style="margin:8px 0"></h3>
           <div class="nilai" id="teks-nilai"></div>
           <div id="rapor-status" style="font-weight:700"></div>
@@ -533,7 +597,7 @@ body.shield .container *{pointer-events:none}
         <div id="motivasi-box"></div>
         <h3>Koreksi, Feedback & Penjelasan Jawaban</h3>
         <div id="feedback-container"></div>
-        <button class="btn no-print" onclick="window.print()">🖨️ Simpan PDF / Cetak Rapor</button>
+        <button class="btn no-print" onclick="window.print()">ðŸ–¨ï¸ Simpan PDF / Cetak Rapor</button>
       </div>
     </div>
 
@@ -636,463 +700,478 @@ const diagData = [
 ];
 
 const kuisA = [
- {
-  "q": "Ungkapan “data buruk masuk, hasil buruk keluar” (garbage in, garbage out) pada KA berarti...",
-  "o": [
-   "Semakin sedikit data, semakin baik hasil KA",
-   "KA mampu mengubah data jelek menjadi hasil sempurna",
-   "Data latih yang berkualitas buruk menghasilkan output KA yang buruk"
-  ],
-  "a": 2,
-  "h": "Baca ulang paragraf pembuka Bagian A tentang peran data bagi KA."
- },
- {
-  "q": "Manakah yang termasuk ciri data berkualitas?",
-  "o": [
-   "Banyak, berantakan, dan sudah lama",
-   "Akurat, lengkap, konsisten, relevan, dan terkini",
-   "Asal mudah dikumpulkan"
-  ],
-  "a": 1,
-  "h": "Lihat daftar “Ciri data berkualitas” pada Bagian A."
- },
- {
-  "q": "Data latih KA sebagian besar hanya berisi satu kelompok orang sehingga KA sering salah pada kelompok lain. Masalah data tersebut adalah...",
-  "o": [
-   "Data terlalu bersih",
-   "Data terlalu terkini",
-   "Data tidak seimbang (bias)"
-  ],
-  "a": 2,
-  "h": "Lihat baris “Data tidak seimbang” pada tabel masalah data Bagian A."
- },
- {
-  "q": "Proses menghapus data ganda, melengkapi data kosong, dan membetulkan kesalahan data disebut...",
-  "o": [
-   "Pembersihan data (data cleaning)",
-   "Enkripsi data",
-   "Penggandaan data"
-  ],
-  "a": 0,
-  "h": "Baca ulang paragraf “Pembersihan data” di akhir Bagian A."
- },
- {
-  "q": "Data yang sangat banyak belum tentu membuat KA baik, sebab...",
-  "o": [
-   "Data banyak yang salah, bias, atau tidak relevan tetap menghasilkan keputusan buruk",
-   "Komputer menolak data berjumlah besar",
-   "Data banyak selalu membuat KA lambat"
-  ],
-  "a": 0,
-  "h": "Baca ulang kotak “Ingat” pada Bagian A."
- }
+  {
+    "q": "KA pemilah sampah benar pada 9 dari 10 foto plastik, tetapi hanya 2 dari 10 foto daun. Data latihnya 90% plastik. Perbaikan paling sesuai adalah...",
+    "o": [
+      "Menambah foto daun yang beragam",
+      "Menambah foto plastik yang jelas",
+      "Menggandakan foto daun yang sama"
+    ],
+    "a": 0,
+    "h": "Lihat data tidak seimbang pada Bagian A. Bandingkan jenis foto yang dikuasai dan yang masih gagal.",
+    "e": "Foto daun yang beragam menambah contoh kelompok yang kurang terwakili. Menggandakan foto yang sama tidak menambah variasi."
+  },
+  {
+    "q": "Tim Raka memiliki 5.000 foto buah, tetapi banyak label keliru. Tim Nia memiliki 1.000 foto jelas dengan label tepat. Agar perbandingan hasil KA adil, keduanya perlu...",
+    "o": [
+      "Menghitung seluruh foto yang dipakai latihan",
+      "Menguji keduanya pada kumpulan foto baru yang sama",
+      "Memilih hasil terbaik dari latihan sendiri"
+    ],
+    "a": 1,
+    "h": "Baca kotak Ingat pada Bagian A. Jumlah data belum menunjukkan ketepatan hasil pada contoh baru.",
+    "e": "Pengujian dengan foto baru yang sama membuat hasil kedua KA dapat dibandingkan. Banyaknya foto latihan saja belum membuktikan kualitasnya."
+  },
+  {
+    "q": "Dalam data latihan, satu foto botol diberi label kaca dan plastik. Ada pula foto tanpa label. Apa langkah pertama yang paling beralasan?",
+    "o": [
+      "Memakai label yang paling umum",
+      "Membuang semua foto yang sudah berlabel",
+      "Memeriksa objek lalu membetulkan label"
+    ],
+    "a": 2,
+    "h": "Baca pembersihan data pada Bagian A. Label harus sesuai dengan objek, bukan dipilih secara asal.",
+    "e": "Memeriksa objek memberi dasar untuk memperbaiki label yang salah dan melengkapi yang kosong. Menebak label dapat menambah kesalahan baru."
+  },
+  {
+    "q": "KA mengenali daun dengan baik saat terang, tetapi sering gagal saat redup. Semua foto latih diambil saat terang. Data tambahan yang paling dibutuhkan adalah...",
+    "o": [
+      "Daun serupa dalam cahaya yang redup",
+      "Daun serupa dalam cahaya yang terang",
+      "Bunga lain dalam cahaya yang redup"
+    ],
+    "a": 0,
+    "h": "Lihat ciri relevan dan beragam pada Bagian A. Cari kondisi penggunaan yang belum terwakili.",
+    "e": "KA perlu contoh daun pada kondisi redup karena kondisi itulah yang belum terwakili. Foto bunga tidak sesuai dengan tugas mengenali daun."
+  },
+  {
+    "q": "KA menyarankan jadwal bus dari data tahun lalu. Sejak bulan ini, rute bus berubah. Sebelum memakai sarannya, Mira sebaiknya...",
+    "o": [
+      "Memilih saran dengan waktu tercepat",
+      "Membandingkan dengan jadwal terbaru",
+      "Mengulang pertanyaan dengan kata lain"
+    ],
+    "a": 1,
+    "h": "Lihat ciri terkini dan relevan pada Bagian A. Apakah kondisi pada data masih sama dengan sekarang?",
+    "e": "Perubahan rute dapat membuat saran lama tidak sesuai. Jadwal terbaru menjadi pembanding yang relevan; mengulang pertanyaan tidak memperbarui sumber data."
+  }
 ];
 const kuisB = [
- {
-  "q": "Manakah yang sebaiknya TIDAK diketik ke chatbot KA?",
-  "o": [
-   "Rumus luas lingkaran",
-   "Nama ibu kota provinsi",
-   "NIK, alamat lengkap, dan nomor rekening bank"
-  ],
-  "a": 2,
-  "h": "Lihat tabel jenis data pada Bagian B, perhatikan kolom data pribadi."
- },
- {
-  "q": "Salah satu risiko memasukkan data pribadi ke layanan KA adalah...",
-  "o": [
-   "Data otomatis terhapus dan aman selamanya",
-   "Data dapat disimpan, disalahgunakan, atau bocor",
-   "Layanan KA menjadi lebih murah"
-  ],
-  "a": 1,
-  "h": "Baca ulang daftar risiko pada paragraf pembuka Bagian B."
- },
- {
-  "q": "Cara aman meminta KA memperbaiki surat yang berisi data pribadi adalah...",
-  "o": [
-   "Mengirim foto KTP sebagai contoh",
-   "Menempelkan data selengkap-lengkapnya",
-   "Mengganti data asli dengan tanda seperti [NAMA] dan [ALAMAT] lebih dulu"
-  ],
-  "a": 2,
-  "h": "Baca ulang bagian “Langkah menjaga keamanan data” pada Bagian B."
- },
- {
-  "q": "Pengamanan akun layanan KA yang paling baik adalah...",
-  "o": [
-   "Membagikan kata sandi kepada teman dekat",
-   "Memakai kata sandi yang sama di semua akun",
-   "Kata sandi kuat dan unik ditambah verifikasi dua langkah"
-  ],
-  "a": 2,
-  "h": "Baca ulang bagian “Langkah menjaga keamanan data” pada Bagian B."
- },
- {
-  "q": "Kamu menerima pesan: “Klik tautan ini dan login akun KA-mu untuk mendapat hadiah!” Tindakan yang tepat adalah...",
-  "o": [
-   "Membagikannya ke semua teman",
-   "Segera mengklik dan login",
-   "Tidak mengklik dan melaporkannya sebagai kemungkinan penipuan (phishing)"
-  ],
-  "a": 2,
-  "h": "Cari kata “phishing” pada bagian Langkah menjaga keamanan data di Bagian B."
- }
+  {
+    "q": "Dita ingin KA merapikan surat izin yang memuat nama, alamat, dan nomor telepon. KA hanya perlu memperbaiki kalimat. Draf yang paling sesuai dikirim adalah...",
+    "o": [
+      "Surat asli dengan nama sekolah saja dihapus",
+      "Surat asli dengan nomor telepon dihapus",
+      "Surat dengan semua identitas disamarkan"
+    ],
+    "a": 2,
+    "h": "Baca langkah menyamarkan data di Bagian B. Pilih data yang memang dibutuhkan untuk memperbaiki kalimat.",
+    "e": "Perbaikan kalimat tidak membutuhkan identitas asli. Menyamarkan seluruh identitas yang tidak diperlukan mengurangi data pribadi yang terkirim."
+  },
+  {
+    "q": "Aplikasi KA peringkas teks meminta akses kontak dan mikrofon. Danu hanya akan menempelkan teks pelajaran. Keputusan paling tepat adalah...",
+    "o": [
+      "Menolak izin yang tidak diperlukan",
+      "Mengizinkan kontak tanpa mikrofon",
+      "Mengizinkan mikrofon tanpa kontak"
+    ],
+    "a": 0,
+    "h": "Baca izin aplikasi pada Bagian B. Hubungkan izin yang diminta dengan tugas yang akan dilakukan.",
+    "e": "Meringkas teks yang ditempel tidak memerlukan kontak atau mikrofon. Memberi sebagian izin yang tetap tidak relevan masih membuka akses yang tidak dibutuhkan."
+  },
+  {
+    "q": "Sari selesai memakai akun KA di komputer perpustakaan. Sesudah tab ditutup, akun masih terbuka saat situs dibuka lagi. Langkah yang menyelesaikan masalah ini adalah...",
+    "o": [
+      "Menghapus riwayat lalu menutup browser",
+      "Keluar akun dan memeriksa akses kembali",
+      "Menghapus obrolan lalu menutup tab"
+    ],
+    "a": 1,
+    "h": "Baca keamanan akun pada Bagian B. Menutup tampilan belum tentu mengakhiri akses akun.",
+    "e": "Keluar akun mengakhiri sesi yang dapat dipakai pengguna berikutnya. Pemeriksaan ulang memastikan akun sudah tidak terbuka di komputer bersama."
+  },
+  {
+    "q": "Pesan berlogo layanan KA menawarkan hadiah dan meminta login lewat tautan. Alamat tautannya berbeda dari situs yang biasa dipakai. Apa langkah paling aman untuk memeriksanya?",
+    "o": [
+      "Mencoba login lewat tautan hadiah itu",
+      "Bertanya pada pengirim pesan itu",
+      "Membuka situs resmi secara mandiri"
+    ],
+    "a": 2,
+    "h": "Lihat phishing pada Bagian B. Logo dapat disalin; pikirkan saluran pemeriksaan yang tidak dikendalikan pengirim.",
+    "e": "Membuka situs resmi secara mandiri memungkinkan pemeriksaan tanpa mengikuti tautan mencurigakan. Logo dan jawaban pengirim tidak membuktikan pesan resmi."
+  },
+  {
+    "q": "Kelas ingin meminta KA menghitung rata-rata waktu perjalanan siswa. Pilihan data yang paling sesuai dengan tujuan itu adalah...",
+    "o": [
+      "Daftar durasi tanpa identitas siswa",
+      "Daftar durasi beserta alamat rumah siswa",
+      "Daftar durasi beserta nomor siswa"
+    ],
+    "a": 0,
+    "h": "Baca langkah menjaga data di Bagian B. Pilih informasi minimum yang cukup untuk menghitung rata-rata.",
+    "e": "Rata-rata cukup dihitung dari durasi. Identitas, alamat, dan nomor siswa tidak membantu perhitungan tersebut sehingga tidak perlu dikirim."
+  }
 ];
 const kuisC = [
- {
-  "q": "Deep fake adalah...",
-  "o": [
-   "Konten gambar, audio, atau video rekayasa KA yang meniru wajah atau suara orang sehingga tampak asli",
-   "Aplikasi pembersih data",
-   "Jenis sensor pada kamera"
-  ],
-  "a": 0,
-  "h": "Baca ulang pengertian pada paragraf pembuka Bagian C."
- },
- {
-  "q": "Tanda yang patut dicurigai pada gambar atau video hasil KA adalah...",
-  "o": [
-   "Ukuran berkas yang kecil",
-   "Resolusi gambar yang tinggi",
-   "Gerak bibir atau kedipan janggal, tepi wajah buram, jari tangan aneh, dan bayangan tidak konsisten"
-  ],
-  "a": 2,
-  "h": "Lihat tabel “Cara mengamati artefak” pada Bagian C."
- },
- {
-  "q": "Langkah awal yang tepat sebelum mempercayai atau membagikan video viral yang mengejutkan adalah...",
-  "o": [
-   "Memeriksa sumber dan membandingkannya dengan media atau situs resmi tepercaya",
-   "Menunggu teman membagikannya lebih dulu",
-   "Menghitung jumlah penontonnya"
-  ],
-  "a": 0,
-  "h": "Baca ulang bagian “Langkah menganalisis artefak” pada Bagian C."
- },
- {
-  "q": "Alat pendeteksi deep fake sebaiknya diperlakukan sebagai...",
-  "o": [
-   "Alat bantu yang tidak 100% akurat, sehingga sumber dan konteks tetap diperiksa",
-   "Alat yang sama sekali tidak berguna",
-   "Hakim yang selalu benar"
-  ],
-  "a": 0,
-  "h": "Baca ulang kotak “Waspada” pada Bagian C."
- },
- {
-  "q": "Dampak negatif penyebaran deep fake adalah...",
-  "o": [
-   "Internet menjadi lebih cepat",
-   "Hoaks, penipuan, pencemaran nama baik, dan perundungan",
-   "Data menjadi lebih bersih"
-  ],
-  "a": 1,
-  "h": "Baca ulang daftar bahaya deep fake pada Bagian C."
- }
+  {
+    "q": "Foto viral memperlihatkan jari yang tampak menyatu. Seorang teman langsung menyebutnya buatan KA. Kesimpulan yang paling didukung bukti saat ini adalah...",
+    "o": [
+      "Foto palsu karena detailnya janggal",
+      "Sumber asli foto itu masih perlu diperiksa",
+      "Foto asli karena wajahnya terlihat jelas"
+    ],
+    "a": 1,
+    "h": "Baca cara mengamati artefak di Bagian C. Bedakan petunjuk awal dengan bukti yang memastikan asal konten.",
+    "e": "Kejanggalan menjadi alasan memeriksa sumber, tetapi belum memastikan penggunaan KA. Sudut pengambilan, kompresi, atau penyuntingan juga dapat mengubah tampilan."
+  },
+  {
+    "q": "Akun yang tidak dikenal mengunggah video pengumuman libur sekolah. Bibir pembicara terlihat wajar dan video ditonton ribuan kali. Langkah berikutnya yang paling berguna adalah...",
+    "o": [
+      "Mencari unggahan dengan penonton lebih banyak",
+      "Memastikan wajah pembicara terlihat lebih jelas",
+      "Mencocokkan pengumuman dengan kanal sekolah"
+    ],
+    "a": 2,
+    "h": "Baca langkah Telusuri pada Bagian C. Penampilan wajar dan jumlah penonton belum membuktikan isi pengumuman.",
+    "e": "Kanal sekolah dapat mengonfirmasi pengumuman. Kejelasan wajah dan banyaknya penonton tidak menunjukkan apakah informasi berlaku untuk sekolah tersebut."
+  },
+  {
+    "q": "Foto berjudul 'banjir pagi ini' ternyata sudah dimuat situs berita dua tahun lalu di kota lain. Temuan ini paling kuat menunjukkan bahwa...",
+    "o": [
+      "Keterangan waktu dan tempatnya menyesatkan",
+      "Gambarnya dibuat dengan teknologi KA baru",
+      "Peristiwa yang sama terjadi kembali hari ini"
+    ],
+    "a": 0,
+    "h": "Baca pencarian gambar balik pada Bagian C. Perhatikan hal yang dapat dibuktikan oleh tanggal dan lokasi sumber lama.",
+    "e": "Sumber lama menunjukkan foto tidak membuktikan banjir pagi ini di lokasi yang disebut. Temuan itu belum membuktikan gambar dibuat oleh KA."
+  },
+  {
+    "q": "Dua alat pendeteksi memberi hasil berbeda untuk video yang sama: 'asli' dan 'rekayasa'. Tim kelas perlu menentukan apakah isi video dapat dipercaya. Langkah terbaik adalah...",
+    "o": [
+      "Mengikuti alat yang tampilannya lebih rinci",
+      "Menelusuri sumber video dan konteks lengkapnya",
+      "Memakai hasil alat yang paling cepat selesai"
+    ],
+    "a": 1,
+    "h": "Baca kotak Waspada di Bagian C. Hasil alat perlu dibandingkan dengan sumber dan konteks.",
+    "e": "Sumber awal dan konteks lengkap menambah bukti yang relevan. Kerincian tampilan atau kecepatan alat tidak menentukan kebenaran hasil deteksinya."
+  },
+  {
+    "q": "Pesan suara mirip guru meminta kode masuk akun kelas. Pesan dikirim dari nomor baru. Sebelum bertindak, Rani sebaiknya...",
+    "o": [
+      "Mengirim kode setelah suaranya diputar ulang",
+      "Meminta nomor baru itu mengirim foto guru lagi",
+      "Menghubungi guru lewat nomor yang dikenal"
+    ],
+    "a": 2,
+    "h": "Baca peniruan suara dan verifikasi di Bagian C. Gunakan saluran lain yang sudah dikenal.",
+    "e": "Nomor yang sudah dikenal memberi saluran pemeriksaan terpisah. Suara dan foto dapat ditiru atau disalin, sehingga bukan dasar untuk menyerahkan kode akun."
+  }
 ];
 
 const formatifData = [
- {
-  "q": "Sebuah aplikasi KA memprediksi curah hujan memakai data sensor yang sebagian besar rusak dan mencatat angka acak. Hasil prediksi aplikasi tersebut kemungkinan besar...",
-  "o": [
-   "Tidak terpengaruh oleh kualitas data",
-   "Sangat akurat karena KA canggih",
-   "Kurang akurat karena kualitas data latihnya buruk",
-   "Selalu benar karena datanya banyak"
-  ],
-  "a": 2,
-  "t": "Kualitas Data",
-  "e": "Kualitas output KA bergantung pada kualitas data. Data yang salah atau acak menghasilkan prediksi yang buruk (garbage in, garbage out)."
- },
- {
-  "q": "Berikut adalah ciri data berkualitas, KECUALI...",
-  "o": [
-   "Relevan dan terkini",
-   "Sengaja diperbanyak dengan data ganda agar terlihat banyak",
-   "Akurat dan sesuai kenyataan",
-   "Lengkap dan tidak banyak yang kosong"
-  ],
-  "a": 1,
-  "t": "Kualitas Data",
-  "e": "Data ganda (duplikat) justru menurunkan kualitas karena membuat pola tertentu tampak lebih sering dari kenyataan."
- },
- {
-  "q": "Data kehadiran siswa yang akan dipakai melatih KA memiliki banyak kolom kosong, dan satu siswa ditulis dengan nama berbeda-beda. Langkah paling tepat sebelum melatih KA adalah...",
-  "o": [
-   "Menambahkan data palsu supaya penuh",
-   "Langsung melatih KA agar cepat selesai",
-   "Membersihkan data: melengkapi yang kosong dan menyeragamkan penulisan",
-   "Menghapus seluruh data tanpa kecuali"
-  ],
-  "a": 2,
-  "t": "Kualitas Data",
-  "e": "Pembersihan data (data cleaning) memastikan data lengkap, konsisten, dan akurat sebelum dipakai melatih KA."
- },
- {
-  "q": "Sistem pengenalan wajah dilatih dengan 90% foto dari satu kelompok orang dan sering gagal mengenali kelompok lain. Masalah utama pada data latih adalah...",
-  "o": [
-   "Data tidak seimbang atau tidak representatif sehingga menimbulkan bias",
-   "Data terlalu sedikit duplikatnya",
-   "Data terlalu terkini",
-   "Data terlalu bersih"
-  ],
-  "a": 0,
-  "t": "Kualitas Data",
-  "e": "Data yang timpang membuat KA hanya mahir pada kelompok yang banyak muncul, sehingga hasilnya bias dan tidak adil."
- },
- {
-  "q": "Pada data suhu ruang kelas, satu baris tercatat 900°C padahal baris lain 27–30°C. Tindakan yang paling tepat adalah...",
-  "o": [
-   "Menjadikannya acuan utama KA",
-   "Mengalikan angka lain agar tampak setara",
-   "Membiarkannya agar data tetap utuh",
-   "Memeriksa penyebabnya (misalnya sensor rusak atau salah input), lalu memperbaiki atau menghapusnya"
-  ],
-  "a": 3,
-  "t": "Kualitas Data",
-  "e": "Nilai yang menyimpang jauh (pencilan) biasanya kesalahan pencatatan. Periksa dulu, lalu perbaiki atau hapus agar KA tidak mempelajari pola yang keliru."
- },
- {
-  "q": "Data pelanggan yang sama tercatat berulang-ulang (duplikat) dalam sebuah dataset. Dampaknya pada KA adalah...",
-  "o": [
-   "KA dapat bekerja tanpa data",
-   "KA otomatis menghapus semua duplikat",
-   "KA menjadi lebih adil",
-   "KA menganggap pola tertentu lebih sering muncul dari kenyataan sehingga hasilnya condong"
-  ],
-  "a": 3,
-  "t": "Kualitas Data",
-  "e": "Data duplikat membuat pola tertentu terlihat lebih dominan sehingga keputusan KA menjadi miring."
- },
- {
-  "q": "Sebuah toko daring melatih KA rekomendasi produk dengan data penjualan tahun 1995. Masalah kualitas data yang paling jelas adalah...",
-  "o": [
-   "Data tidak terkini sehingga kurang relevan dengan kondisi sekarang",
-   "Data terlalu lengkap",
-   "Data terlalu bersih",
-   "Data terlalu cepat dikumpulkan"
-  ],
-  "a": 0,
-  "t": "Kualitas Data",
-  "e": "Data harus relevan dan terkini. Kebiasaan belanja masa lalu belum tentu sama dengan masa kini."
- },
- {
-  "q": "Pernyataan yang paling tepat tentang jumlah data dan kualitas data adalah...",
-  "o": [
-   "Data besar yang salah, bias, atau tidak relevan tetap menghasilkan keputusan KA yang buruk",
-   "Semakin banyak data pasti semakin baik",
-   "Data sedikit selalu lebih baik daripada data besar",
-   "Kualitas data tidak penting asalkan komputernya cepat"
-  ],
-  "a": 0,
-  "t": "Kualitas Data",
-  "e": "Yang menentukan adalah kualitas, bukan semata jumlah. Data banyak tetapi buruk tetap menghasilkan output buruk."
- },
- {
-  "q": "Manakah informasi yang paling perlu dijaga dan tidak sebaiknya diketik ke chatbot KA?",
-  "o": [
-   "Rumus luas segitiga",
-   "Pengertian fotosintesis",
-   "Nama planet di tata surya",
-   "Nomor induk kependudukan, alamat lengkap, dan nomor rekening bank"
-  ],
-  "a": 3,
-  "t": "Keamanan Data dalam Pemanfaatan KA",
-  "e": "NIK, alamat, dan nomor rekening adalah data pribadi. Pertanyaan umum tanpa identitas aman diajukan."
- },
- {
-  "q": "Mengapa memasukkan data pribadi ke layanan KA berisiko?",
-  "o": [
-   "Karena KA hanya menerima angka",
-   "Karena data otomatis terhapus sehingga percuma",
-   "Karena data dapat disimpan, dipakai untuk melatih model, atau bocor jika akun atau sistem diretas",
-   "Karena KA tidak bisa membaca teks"
-  ],
-  "a": 2,
-  "t": "Keamanan Data dalam Pemanfaatan KA",
-  "e": "Data yang kamu masukkan keluar dari kendalimu. Bisa tersimpan, dipakai ulang, atau bocor, lalu disalahgunakan."
- },
- {
-  "q": "Sinta ingin KA memperbaiki surat lamaran yang memuat nama, alamat, dan nomor HP. Cara paling aman adalah...",
-  "o": [
-   "Mengirim foto KTP agar KA lebih paham",
-   "Mengganti data pribadi dengan tanda seperti [NAMA], [ALAMAT], [NO HP], lalu mengisinya sendiri setelah selesai",
-   "Menempelkan seluruh data aslinya",
-   "Mengunggah surat ke banyak aplikasi KA sekaligus"
-  ],
-  "a": 1,
-  "t": "Keamanan Data dalam Pemanfaatan KA",
-  "e": "Menyamarkan data (anonimisasi) menjaga kegunaan KA sekaligus melindungi identitasmu."
- },
- {
-  "q": "Aplikasi edit foto berbasis KA meminta akses kontak, lokasi, dan mikrofon, padahal fungsinya hanya menghapus latar. Sikap yang paling bijak adalah...",
-  "o": [
-   "Menyetujui semua izin tanpa membaca",
-   "Memberi izin lalu menyebarkan aplikasinya",
-   "Membatasi atau menolak izin yang tidak diperlukan, bahkan mempertimbangkan untuk tidak memakai aplikasi itu",
-   "Membagikan kata sandi kepada pengembangnya"
-  ],
-  "a": 2,
-  "t": "Keamanan Data dalam Pemanfaatan KA",
-  "e": "Berikan izin seperlunya saja (prinsip kebutuhan minimum). Izin yang tidak relevan adalah tanda bahaya bagi data pribadimu."
- },
- {
-  "q": "Kombinasi pengamanan akun layanan KA yang paling kuat adalah...",
-  "o": [
-   "Kata sandi panjang dan unik (huruf besar, kecil, angka, simbol) ditambah verifikasi dua langkah",
-   "Kata sandi berupa tanggal lahir yang mudah diingat",
-   "Kata sandi yang sama untuk semua akun",
-   "Kata sandi ditulis dan ditempel di layar"
-  ],
-  "a": 0,
-  "t": "Keamanan Data dalam Pemanfaatan KA",
-  "e": "Kata sandi unik dan kuat plus verifikasi dua langkah membuat akun jauh lebih sulit dibobol."
- },
- {
-  "q": "Sebuah pesan berbunyi: “Selamat! Kamu mendapat akses KA premium gratis. Klik tautan dan masukkan kata sandimu.” Tindakan yang tepat adalah...",
-  "o": [
-   "Tidak mengklik, tidak memasukkan kata sandi, dan melaporkannya karena kemungkinan penipuan (phishing)",
-   "Segera mengklik karena gratis",
-   "Membalas pesan dengan data lengkap",
-   "Meneruskannya ke semua teman"
-  ],
-  "a": 0,
-  "t": "Keamanan Data dalam Pemanfaatan KA",
-  "e": "Pesan yang memancing klik dan meminta kata sandi adalah ciri phishing. Jangan diklik dan laporkan."
- },
- {
-  "q": "Budi ingin mengunggah foto temannya ke aplikasi KA untuk dijadikan stiker. Hal yang paling tepat dilakukan adalah...",
-  "o": [
-   "Meminta izin teman terlebih dahulu karena foto wajah termasuk data pribadi",
-   "Langsung mengunggah karena hanya untuk bersenang-senang",
-   "Mengunggah lalu menyebarkan stikernya tanpa memberi tahu",
-   "Mengunggahnya diam-diam"
-  ],
-  "a": 0,
-  "t": "Keamanan Data dalam Pemanfaatan KA",
-  "e": "Foto wajah adalah data pribadi, bahkan data biometrik. Menggunakan data orang lain memerlukan persetujuannya."
- },
- {
-  "q": "Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP) pada dasarnya bertujuan untuk...",
-  "o": [
-   "Mewajibkan setiap orang menyebarkan datanya",
-   "Melindungi hak pemilik data pribadi dan mengatur pengelolaan data pribadi",
-   "Melarang semua orang memakai internet",
-   "Menghapus seluruh data di aplikasi"
-  ],
-  "a": 1,
-  "t": "Keamanan Data dalam Pemanfaatan KA",
-  "e": "UU PDP mengatur pelindungan data pribadi warga serta kewajiban pihak yang mengelolanya."
- },
- {
-  "q": "Pernyataan yang paling tepat mengenai deep fake adalah...",
-  "o": [
-   "Jenis kamera beresolusi tinggi",
-   "Konten gambar, audio, atau video rekayasa KA yang meniru wajah atau suara seseorang sehingga tampak asli",
-   "Foto yang diedit biasa tanpa bantuan KA",
-   "Program antivirus untuk gambar"
-  ],
-  "a": 1,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Deep fake dibuat dengan KA untuk meniru wajah atau suara orang nyata sehingga tampak meyakinkan."
- },
- {
-  "q": "Manakah yang termasuk tanda visual yang patut dicurigai pada gambar atau video hasil KA?",
-  "o": [
-   "Warna gambar yang cerah",
-   "Ukuran gambar yang besar",
-   "Berkas berformat JPG",
-   "Jari tangan tampak janggal, tepi wajah buram, dan arah bayangan tidak konsisten"
-  ],
-  "a": 3,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Kejanggalan detail seperti jari, tepi wajah, bayangan, dan teks yang tidak terbaca sering muncul pada artefak buatan KA."
- },
- {
-  "q": "Seseorang menerima telepon bersuara persis seperti ayahnya yang meminta transfer uang segera. Langkah paling tepat adalah...",
-  "o": [
-   "Meminta penelepon mengirim foto lewat telepon yang sama",
-   "Menutup telepon lalu menghubungi ayah lewat nomor yang dikenal, atau menanyakan hal yang hanya diketahui keluarga",
-   "Langsung mentransfer karena suaranya sangat mirip",
-   "Menyebarkan nomor penelepon ke media sosial sebelum memeriksa"
-  ],
-  "a": 1,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Suara dapat ditiru KA. Verifikasi lewat saluran lain yang tepercaya sebelum mengirim uang atau data."
- },
- {
-  "q": "Video viral dari akun anonim memperlihatkan seorang pejabat “mengumumkan sekolah libur sebulan”. Langkah pertama yang tepat adalah...",
-  "o": [
-   "Menelusuri sumber dan memeriksa pengumuman di situs atau media resmi yang tepercaya",
-   "Membagikannya ke grup kelas agar teman tahu",
-   "Mengomentari tanpa memeriksa",
-   "Menganggapnya benar karena sudah ditonton ribuan orang"
-  ],
-  "a": 0,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Jumlah penonton bukan bukti kebenaran. Periksa sumber dan konfirmasi di kanal resmi sebelum percaya atau menyebarkan."
- },
- {
-  "q": "Sebuah foto sangat realistis menampilkan anak dengan tangan berjari enam dan papan di belakangnya bertuliskan huruf acak yang tidak terbaca. Kesimpulan yang paling beralasan adalah...",
-  "o": [
-   "Foto itu kemungkinan dibuat atau diubah KA, sehingga perlu diverifikasi lebih lanjut",
-   "Foto itu pasti asli karena sangat jelas",
-   "Foto itu pasti hasil kamera terbaik",
-   "Foto itu tidak perlu dipikirkan"
-  ],
-  "a": 0,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Jari yang tidak wajar dan teks berantakan adalah kelemahan umum gambar buatan KA. Tetap verifikasi lewat sumber dan konteks."
- },
- {
-  "q": "Sebuah alat pendeteksi menyatakan video tertentu “asli 95%”. Sikap yang paling bijak adalah...",
-  "o": [
-   "Menganggapnya pasti asli dan langsung menyebarkannya",
-   "Menjadikan hasil alat sebagai bahan pertimbangan, lalu tetap memeriksa sumber dan konteks karena alat tidak selalu akurat",
-   "Mengabaikan alat pendeteksi sepenuhnya",
-   "Mempercayai alat karena tidak mungkin salah"
-  ],
-  "a": 1,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Alat pendeteksi hanyalah alat bantu. Hasilnya bisa keliru sehingga manusia tetap harus memeriksa sumber dan konteks."
- },
- {
-  "q": "Berikut adalah dampak negatif penyebaran deep fake, KECUALI...",
-  "o": [
-   "Meningkatnya kepercayaan publik pada semua informasi",
-   "Penipuan dan perundungan",
-   "Beredarnya hoaks",
-   "Pencemaran nama baik"
-  ],
-  "a": 0,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Deep fake justru merusak kepercayaan publik, menyebarkan hoaks, mencemarkan nama baik, dan dipakai untuk menipu atau merundung."
- },
- {
-  "q": "Fungsi pencarian gambar balik (reverse image search) dalam menganalisis sebuah gambar adalah...",
-  "o": [
-   "Menghapus data pribadi pada gambar",
-   "Menambah resolusi gambar",
-   "Mengubah gambar menjadi hitam putih",
-   "Menelusuri asal-usul dan kemunculan gambar sebelumnya, misalnya gambar lama yang dipakai ulang pada konteks baru"
-  ],
-  "a": 3,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Pencarian gambar balik membantu menemukan sumber asli dan melihat apakah gambar dipakai di luar konteksnya."
- },
- {
-  "q": "Kamu menemukan video deep fake yang mempermalukan temanmu di media sosial. Tindakan yang paling bertanggung jawab adalah...",
-  "o": [
-   "Membalas dengan membuat deep fake lain",
-   "Ikut membagikan agar temanmu tahu",
-   "Tidak menyebarkan, menyimpan bukti, melaporkan ke platform, dan memberi tahu guru atau orang dewasa",
-   "Mengabaikan karena bukan urusanmu"
-  ],
-  "a": 2,
-  "t": "Analisis Artefak Hasil KA",
-  "e": "Jangan ikut menyebarkan. Simpan bukti, laporkan, dan cari bantuan orang dewasa agar korban terlindungi."
- }
+  {
+    "q": "KA memeriksa kondisi buku. Saat diuji, 19 dari 20 buku utuh dikenali benar, tetapi hanya 2 dari 10 buku rusak dikenali benar. Data latih hampir seluruhnya buku utuh. Perbaikan paling sesuai adalah...",
+    "o": [
+      "Menambah contoh kerusakan buku yang beragam",
+      "Menambah contoh buku utuh dengan sampul baru",
+      "Menghapus buku rusak dari kumpulan pengujian",
+      "Mengulang latihan dengan kumpulan yang sama"
+    ],
+    "a": 0,
+    "t": "Kualitas Data",
+    "e": "Hasil per kelompok menunjukkan kelemahan pada buku rusak. Contoh kerusakan yang beragam memperbaiki keterwakilan data, sedangkan menghapusnya dari pengujian hanya menyembunyikan kelemahan."
+  },
+  {
+    "q": "Satu catatan peminjaman buku tersalin 12 kali saat data digabung. KA lalu memperkirakan buku itu jauh lebih diminati. Sebelum melatih ulang, tim perlu...",
+    "o": [
+      "Menambah salinan untuk semua buku lain yang sejenis",
+      "Memeriksa sumber lalu menghapus salinan ganda",
+      "Mengubah semua salinan menjadi tanggal baru",
+      "Memisahkan salinan berdasarkan warna sampul"
+    ],
+    "a": 1,
+    "t": "Kualitas Data",
+    "e": "Satu peminjaman yang dihitung berulang membuat minat tampak lebih besar dari kenyataan. Memeriksa sumber membedakan salinan ganda dari transaksi yang memang berbeda."
+  },
+  {
+    "q": "Pada data suhu kelas, sebagian besar catatan 27â€“30Â°C, tetapi satu catatan 900Â°C. Penyebabnya belum diketahui. Langkah pertama yang paling tepat adalah...",
+    "o": [
+      "Mengganti angka itu dengan suhu terendah di kelas",
+      "Menganggap angka itu sebagai tanda kebakaran",
+      "Memeriksa catatan sumber dan kondisi sensornya",
+      "Menyamakan angka lain dengan catatan terbesar"
+    ],
+    "a": 2,
+    "t": "Kualitas Data",
+    "e": "Angka yang sangat berbeda perlu diperiksa sebelum diperbaiki atau dikeluarkan. Mengganti atau menafsirkannya tanpa bukti dapat menambah kesalahan pada data."
+  },
+  {
+    "q": "KA sering menukar label botol kaca dan plastik. Tim menemukan 80 foto botol plastik berlabel kaca. Uji coba berikutnya sebaiknya dilakukan setelah tim...",
+    "o": [
+      "Menambah foto kaca dengan ukuran lebih besar",
+      "Menghapus semua foto yang berisi botol kaca",
+      "Menyamakan jumlah foto tanpa memeriksa label",
+      "Memeriksa dan membetulkan label sesuai objek foto"
+    ],
+    "a": 3,
+    "t": "Kualitas Data",
+    "e": "Label yang salah mengajarkan hubungan objek dan kategori yang keliru. Memperbaiki label berdasarkan objek menangani masalah yang benar-benar ditemukan."
+  },
+  {
+    "q": "Tim A menguji KA pada foto yang pernah dipakai latihan. Tim B memakai foto baru. Nilai A lebih tinggi. Agar kesimpulan perbandingannya kuat, keduanya perlu...",
+    "o": [
+      "Diuji pada kumpulan foto baru yang sama",
+      "Dilatih ulang sampai mendapat nilai sama",
+      "Diuji lagi memakai foto latihan tim A",
+      "Dinilai dari jumlah foto latihan saja"
+    ],
+    "a": 0,
+    "t": "Kualitas Data",
+    "e": "Foto baru yang sama menyediakan pembanding yang adil. Nilai dari kumpulan berbeda, terutama foto yang sudah dipakai latihan, belum cukup untuk menentukan KA mana yang lebih baik."
+  },
+  {
+    "q": "Lima kolom jumlah pengunjung kantin kosong. Teman Beni ingin mengisinya dengan nol agar tabel lengkap. Namun, belum ada bukti kantin sepi pada hari itu. Beni sebaiknya...",
+    "o": [
+      "Mengisi nol lalu langsung memakai datanya",
+      "Mengecek catatan asli sebelum mengisinya",
+      "Menyalin jumlah tertinggi hari lain",
+      "Mengisi angka rata-rata tanpa mencari bukti"
+    ],
+    "a": 1,
+    "t": "Kualitas Data",
+    "e": "Kosong berarti belum tercatat, sedangkan nol berarti tidak ada pengunjung. Catatan sumber perlu diperiksa agar kelengkapan tidak dicapai dengan data yang dibuat-buat."
+  },
+  {
+    "q": "Kantin menghapus menu gorengan dan menambah buah bulan ini. KA memperkirakan belanja bahan dari penjualan tahun lalu. Perubahan data yang paling sesuai adalah...",
+    "o": [
+      "Memakai semua menu lama agar data lebih banyak",
+      "Memakai penjualan menu terlaris pada tahun lalu",
+      "Memakai data sesuai menu yang berlaku kini",
+      "Memakai perkiraan dari menu kantin lain saja"
+    ],
+    "a": 2,
+    "t": "Kualitas Data",
+    "e": "Tugasnya memperkirakan kebutuhan untuk menu sekarang. Data yang sesuai dengan menu dan kondisi terkini lebih relevan daripada memperbanyak catatan menu yang sudah tidak dijual."
+  },
+  {
+    "q": "Tim hanya bisa memeriksa satu paket data untuk KA pengenal daun sehat dan sakit. Paket mana yang paling layak diperiksa lebih lanjut?",
+    "o": [
+      "8.000 foto daun, hampir semua jenis yang sehat",
+      "6.000 foto daun, banyak labelnya belum diperiksa",
+      "9.000 foto bunga, semua labelnya telah diperiksa",
+      "2.000 foto daun, jelas dan kedua kondisi terwakili"
+    ],
+    "a": 3,
+    "t": "Kualitas Data",
+    "e": "Paket terakhir paling sesuai dengan objek dan kedua kondisi yang perlu dikenali. Jumlah besar tidak menutupi masalah ketimpangan, label yang belum terverifikasi, atau objek yang tidak relevan."
+  },
+  {
+    "q": "OSIS meminta KA menghitung rata-rata jumlah buku yang dibaca siswa per bulan. Semua data berikut tersedia. Berkas mana yang cukup untuk tujuan itu?",
+    "o": [
+      "Jumlah buku tiap siswa tanpa identitas",
+      "Jumlah buku beserta nomor telepon siswa",
+      "Jumlah buku dan alamat rumah siswa",
+      "Jumlah buku dan foto kartu pelajar siswa"
+    ],
+    "a": 0,
+    "t": "Keamanan Data dalam Pemanfaatan KA",
+    "e": "Perhitungan rata-rata cukup menggunakan jumlah buku. Nomor telepon, alamat, dan foto kartu tidak diperlukan dan menambah data pribadi yang tersebar."
+  },
+  {
+    "q": "Arga mengganti namanya dengan [NAMA] dalam draf untuk chatbot, tetapi alamat rumah dan nomor telepon masih utuh. Perbaikan yang paling sesuai sebelum mengirim adalah...",
+    "o": [
+      "Mengganti nama samaran dengan nama panggilan",
+      "Menyamarkan alamat rumah serta nomor teleponnya",
+      "Menghapus judul surat dan nama penerimanya",
+      "Memindahkan alamat ke paragraf paling akhir"
+    ],
+    "a": 1,
+    "t": "Keamanan Data dalam Pemanfaatan KA",
+    "e": "Menyamarkan nama saja belum cukup karena alamat dan nomor telepon tetap dapat mengungkap identitas. Memindahkan letak data tidak mengurangi informasi yang terkirim."
+  },
+  {
+    "q": "Layanan KA penghapus latar foto meminta akses seluruh kontak agar bisa mulai. Tugas sekolah hanya memerlukan gambar benda tanpa orang. Keputusan paling masuk akal adalah...",
+    "o": [
+      "Memberi akses kontak selama satu hari saja",
+      "Meminjam akun teman untuk memberi izin itu",
+      "Memilih layanan tanpa izin yang tidak relevan",
+      "Mengizinkan kontak setelah ukuran gambar diperkecil"
+    ],
+    "a": 2,
+    "t": "Keamanan Data dalam Pemanfaatan KA",
+    "e": "Kontak tidak dibutuhkan untuk menghapus latar gambar benda. Bila izin itu wajib, memilih alternatif yang sesuai menghindari pemberian akses tanpa kebutuhan."
+  },
+  {
+    "q": "Lila perlu contoh surat undangan dari KA. Ia belum perlu mengirim undangan sungguhan. Permintaan mana yang memberi konteks cukup sekaligus membatasi data pribadi?",
+    "o": [
+      "Buat undangan dengan daftar nomor tamu asli",
+      "Buat undangan dengan alamat rumah lengkap",
+      "Buat undangan dari foto kartu keluarga ini",
+      "Buat undangan dengan [NAMA] dan [LOKASI]"
+    ],
+    "a": 3,
+    "t": "Keamanan Data dalam Pemanfaatan KA",
+    "e": "Penanda sudah cukup untuk membuat contoh susunan undangan. Data asli dapat diisi sendiri setelah draf selesai, tanpa dikirim ke layanan KA."
+  },
+  {
+    "q": "Pesan 'akun KA akan diblokir' meminta Seno login segera. Tautannya memakai nama situs yang mirip, tetapi ada satu huruf tambahan. Cara memeriksa ancaman itu adalah...",
+    "o": [
+      "Membuka aplikasi resmi lewat pintasan sendiri",
+      "Mencoba tautan dengan kata sandi akun lain",
+      "Meminta pengirim mengulang tautan yang sama",
+      "Meneruskan tautan itu agar teman mencoba lebih dahulu"
+    ],
+    "a": 0,
+    "t": "Keamanan Data dalam Pemanfaatan KA",
+    "e": "Aplikasi resmi yang dibuka secara mandiri memberi jalur pemeriksaan terpisah. Alamat mirip dan tekanan waktu patut dicurigai; mencoba tautan tetap dapat membuka risiko."
+  },
+  {
+    "q": "Kata sandi akun gim Tio bocor. Ia memakai kata sandi yang sama pada akun KA. Tidak ada tanda akun KA telah dibuka orang lain. Langkah paling tepat sekarang adalah...",
+    "o": [
+      "Menunggu pemberitahuan masuk yang mencurigakan",
+      "Memakai sandi baru yang unik dan verifikasi dua langkah",
+      "Mengubah nama pengguna tetapi mempertahankan sandi",
+      "Menghapus riwayat obrolan tanpa mengganti sandi"
+    ],
+    "a": 1,
+    "t": "Keamanan Data dalam Pemanfaatan KA",
+    "e": "Sandi yang bocor dapat dicoba pada akun lain. Sandi baru yang unik dan verifikasi dua langkah mengurangi risiko sebelum muncul tanda penyalahgunaan."
+  },
+  {
+    "q": "Nala memakai akun KA di komputer bersama dan memilih 'simpan kata sandi'. Ia akan pulang. Tindakan mana yang paling langsung mengurangi akses pengguna berikutnya?",
+    "o": [
+      "Menghapus judul riwayat percakapan terakhir",
+      "Menutup layar percakapan dengan tab kosong",
+      "Keluar dari akun dan menghapus sandi tersimpan",
+      "Mengganti gambar profil menjadi gambar umum"
+    ],
+    "a": 2,
+    "t": "Keamanan Data dalam Pemanfaatan KA",
+    "e": "Keluar akun mengakhiri sesi, sedangkan menghapus sandi tersimpan mencegah login ulang dengan sandi tersebut. Menutup tampilan atau mengubah profil tidak mengakhiri akses."
+  },
+  {
+    "q": "Teman-teman memberi izin rekaman suara untuk tugas kelompok. Bayu ingin mengunggahnya ke layanan KA pembuat tiruan suara, yang belum dibahas bersama. Pilihan paling bertanggung jawab adalah...",
+    "o": [
+      "Mengunggah karena izin merekam sudah diberikan",
+      "Mengunggah lalu memberi tahu setelah selesai",
+      "Menghapus nama berkas lalu langsung mengunggah",
+      "Menjelaskan rencana dan meminta izin khusus"
+    ],
+    "a": 3,
+    "t": "Keamanan Data dalam Pemanfaatan KA",
+    "e": "Izin merekam untuk tugas tidak otomatis mencakup pengiriman ke layanan lain atau peniruan suara. Tujuan dan risikonya perlu dijelaskan sebelum meminta persetujuan."
+  },
+  {
+    "q": "Poster lomba mengaku berasal dari sekolah. Gambarnya rapi tanpa kejanggalan, tetapi pengunggahnya akun baru. Sebelum mendaftar, bukti mana yang paling perlu dicari?",
+    "o": [
+      "Pengumuman yang sesuai dari kanal sekolah",
+      "Versi poster dengan ukuran gambar terbesar",
+      "Komentar yang memuji kerapian desainnya",
+      "Unggahan ulang dengan jumlah suka terbanyak"
+    ],
+    "a": 0,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Kanal sekolah dapat mengonfirmasi penyelenggara dan syarat lomba. Tidak adanya kejanggalan visual, kualitas gambar, dan popularitas tidak membuktikan asal pengumuman."
+  },
+  {
+    "q": "Video singkat bersuara mirip kepala sekolah menyatakan ujian ditunda. Video hanya beredar di grup siswa. Pihak sekolah belum mengumumkan perubahan. Tindakan paling tepat adalah...",
+    "o": [
+      "Mengikuti video karena suara terdengar serupa",
+      "Memeriksa perubahan melalui guru atau sekolah",
+      "Menyebarkan video untuk mengambil suara seluruh kelas",
+      "Membandingkan banyaknya pengikut pengunggah"
+    ],
+    "a": 1,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Perubahan jadwal perlu dikonfirmasi melalui pihak yang berwenang. Suara dapat ditiru dan potongan video dapat kehilangan konteks, sehingga kemiripan suara belum cukup."
+  },
+  {
+    "q": "Pencarian gambar balik menemukan foto 'jalan depan sekolah rusak hari ini' dalam berita tahun lalu di daerah lain. Kesimpulan yang paling kuat adalah...",
+    "o": [
+      "Foto dibuat oleh KA karena dipakai dua kali",
+      "Jalan sekolah pasti tidak mengalami kerusakan",
+      "Foto itu tidak mendukung keterangan unggahan",
+      "Berita lama membuktikan kerusakan berlanjut"
+    ],
+    "a": 2,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Foto lama dari lokasi lain tidak mendukung klaim tentang keadaan jalan sekolah hari ini. Temuan ini tidak memastikan cara pembuatan foto atau keadaan jalan yang sebenarnya."
+  },
+  {
+    "q": "Alat pendeteksi memberi skor '99% asli' pada video promosi beasiswa yang meminta biaya pendaftaran. Sumber dan penyelenggaranya belum jelas. Keputusan paling beralasan adalah...",
+    "o": [
+      "Membayar karena skor alat sudah sangat tinggi",
+      "Mendaftar selama tampilan pembicara terlihat wajar",
+      "Mengikuti komentar pengguna yang paling banyak",
+      "Memeriksa penyelenggara lewat sumber terpisah"
+    ],
+    "a": 3,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Skor pendeteksi dapat keliru dan tidak membuktikan keabsahan beasiswa. Identitas penyelenggara serta ketentuan biaya perlu dikonfirmasi melalui sumber yang dapat dipercaya."
+  },
+  {
+    "q": "Potongan video membuat pembina OSIS seolah membatalkan lomba. Video lengkap memperlihatkan ia sedang membaca contoh kabar palsu. Bukti baru ini menunjukkan bahwa...",
+    "o": [
+      "Potongan itu menghilangkan konteks pembicaraan",
+      "Video lengkap membuktikan wajah pembina palsu",
+      "Suara pembina pasti dibuat dengan bantuan KA",
+      "Lomba batal karena kalimatnya pernah terucap"
+    ],
+    "a": 0,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Video lengkap menjelaskan bahwa kalimat tersebut merupakan contoh, bukan keputusan. Informasi dapat menyesatkan akibat potongan konteks tanpa harus dibuat dengan KA."
+  },
+  {
+    "q": "Penelepon bersuara mirip kakak meminta uang segera dan melarang Dani menelepon nomor kakak yang biasa. Langkah yang paling kuat untuk memeriksa identitasnya adalah...",
+    "o": [
+      "Meminta penelepon mengulang nama Dani",
+      "Menghubungi kakak lewat nomor yang dikenal",
+      "Meminta foto lewat nomor penelepon yang sama",
+      "Memutar rekaman suara itu beberapa kali lagi"
+    ],
+    "a": 1,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Menghubungi nomor yang sudah dikenal memakai saluran terpisah dari penelepon. Nama, suara, dan foto dapat diperoleh atau ditiru sehingga belum menjadi bukti identitas yang cukup."
+  },
+  {
+    "q": "Di sebuah foto, arah bayangan terlihat berbeda-beda. Belum diketahui sumber dan cara pembuatannya. Catatan analisis mana yang paling tepat?",
+    "o": [
+      "Bayangan berbeda cukup untuk menetapkan foto palsu",
+      "Cahaya tambahan bisa ada, jadi foto boleh dipercaya",
+      "Bayangan perlu diperiksa bersama sumber foto",
+      "Hasil satu pendeteksi cukup untuk menentukan asalnya"
+    ],
+    "a": 2,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Ketidaksesuaian bayangan adalah petunjuk untuk diperiksa, bukan vonis penggunaan KA. Sumber asli dan konteks pencahayaan membantu menilai kemungkinan penyebabnya."
+  },
+  {
+    "q": "Sebuah video rekayasa mempermalukan teman sekelas. Guru membutuhkan bukti agar dapat menindaklanjuti. Cara yang paling membantu sekaligus membatasi penyebarannya adalah...",
+    "o": [
+      "Membagikan ulang video ke seluruh grup kelas",
+      "Membuat video balasan yang mengejek para pembuatnya",
+      "Mengunggah ulang dengan tulisan pembelaan",
+      "Mencatat tautan lalu melapor secara pribadi"
+    ],
+    "a": 3,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Tautan dan informasi unggahan membantu pelaporan kepada guru tanpa memperluas penonton. Mengunggah ulang, termasuk untuk membela, dapat menambah penyebaran konten yang merugikan."
+  },
+  {
+    "q": "Dua akun memuat klaim yang sama. Akun pertama memberi tautan rekaman utuh dan dokumen resmi yang cocok. Akun kedua hanya memberi tangkapan layar tanpa sumber. Mengapa bukti pertama lebih kuat?",
+    "o": [
+      "Sumber awal dan konteks lengkapnya dapat ditelusuri",
+      "Dua akun yang sepakat membuktikan kebenarannya",
+      "Video lebih layak dipercaya daripada gambar",
+      "Tautan dokumen mengurangi kebutuhan cek konteks"
+    ],
+    "a": 0,
+    "t": "Analisis Artefak Hasil KA",
+    "e": "Rekaman utuh dan dokumen yang sesuai menyediakan bukti yang bisa ditelusuri dan dibandingkan. Kekuatan bukti terletak pada pemeriksaan sumber dan konteks, bukan jaminan bahwa sebuah format selalu benar."
+  }
 ];
 
 /* ---------------- UTILITAS ---------------- */
@@ -1101,7 +1180,7 @@ function fmt(sec){ sec=Math.max(0,Math.ceil(sec)); return String(Math.floor(sec/
 function esc(t){ return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function textHTML(t){ return esc(t).replace(/\n/g,'<br>'); }
 
-function showModal({icon="ℹ️",title="",body="",ok="OK",onOk=null,cancel=null,onCancel=null}){
+function showModal({icon="â„¹ï¸",title="",body="",ok="OK",onOk=null,cancel=null,onCancel=null}){
   $('m-ic').textContent=icon; $('m-title').textContent=title; $('m-body').innerHTML=body;
   const okB=$('m-ok'), caB=$('m-cancel');
   okB.textContent=ok; okB.onclick=()=>{ $('modal').classList.remove('show'); onOk&&onOk(); };
@@ -1111,7 +1190,7 @@ function showModal({icon="ℹ️",title="",body="",ok="OK",onOk=null,cancel=null
 }
 
 function levelName(){ return S.xp>=260?'Master AI':S.xp>=160?'Analis AI':S.xp>=60?'Penjelajah':'Pemula'; }
-function tambahXP(n){ S.xp+=n; $('xp-chip').textContent=`⭐ ${S.xp} XP • ${levelName()}`; }
+function tambahXP(n){ S.xp+=n; $('xp-chip').textContent=`â­ ${S.xp} XP â€¢ ${levelName()}`; }
 
 const stepOrder=['step-login','step-apersepsi','step-materi','step-simulasi','step-formatif'];
 function showStep(id){
@@ -1154,7 +1233,7 @@ function mulaiKuis(prefix){
   const run=quizRun[prefix];
   run.tries=(run.tries||0)+1; run.idx=0;
   run.list=shuffle(quizSource[prefix]).map(it=>({
-    q:it.q, h:it.h,
+    q:it.q, h:it.h, e:it.e,
     o:shuffle(it.o.map((t,j)=>({t:t, ok:j===it.a})))
   }));
   tampilSoal(prefix);
@@ -1166,7 +1245,7 @@ function dotsHTML(run,state){
 
 function tampilSoal(prefix){
   const run=quizRun[prefix], el=$(quizBox[prefix]), it=run.list[run.idx], n=run.list.length;
-  $('skor-'+prefix).textContent=`Soal ${run.idx+1} / ${n} • Percobaan ke-${run.tries}`;
+  $('skor-'+prefix).textContent=`Soal ${run.idx+1} / ${n} â€¢ Percobaan ke-${run.tries}`;
   el.innerHTML = dotsHTML(run)+
     `<div class="qcard"><p class="qtext"><b>Soal ${run.idx+1} dari ${n}.</b> ${esc(it.q)}</p>`+
     it.o.map((o,j)=>optHTML(prefix+'_q',j,o.t,run.idx)).join('')+
@@ -1187,27 +1266,29 @@ function periksaKuis(prefix){
   if(pick.ok){
     sel.closest('.opt').classList.add('correct');
     const key=prefix+':'+it.q;
-    if(!quizXP.has(key)){ quizXP.add(key); tambahXP(10); fb.className='fb ok'; fb.textContent='✔ Benar! +10 XP'; }
-    else { fb.className='fb ok'; fb.textContent='✔ Benar!'; }
+    if(!quizXP.has(key)){ quizXP.add(key); tambahXP(10); fb.className='fb ok'; fb.textContent='âœ” Benar! +10 XP'; }
+    else { fb.className='fb ok'; fb.textContent='âœ” Benar!'; }
+    if(it.e) $(prefix+'_hint').innerHTML=`<div class="hintbox">ðŸ’¡ ${esc(it.e)}</div>`;
     run.idx++;
+    el.querySelector('.dots').innerHTML=run.list.map((_,i)=>`<i class="${i<run.idx?'ok':''}"></i>`).join('');
     if(run.idx>=n){
       quizDone[prefix]=true;
-      $('skor-'+prefix).textContent=`✅ Tuntas (${n} / ${n}) • selesai pada percobaan ke-${run.tries}`;
-      fb.textContent+=` 🎉 Kuis ${quizName[prefix]} tuntas!`;
+      $('skor-'+prefix).textContent=`âœ… Tuntas (${n} / ${n}) â€¢ selesai pada percobaan ke-${run.tries}`;
+      fb.textContent+=` ðŸŽ‰ Kuis ${quizName[prefix]} tuntas!`;
       btn.style.display='none';
       cekTombolMateri();
     } else {
-      btn.textContent='Soal Berikutnya ➔'; btn.classList.add('green');
+      btn.textContent='Soal Berikutnya âž”'; btn.classList.add('green');
       btn.onclick=()=>tampilSoal(prefix);
     }
   } else {
     // SALAH: jawaban benar TIDAK ditampilkan, kuis diulang dari awal dengan susunan acak
     fb.className='fb no';
-    fb.textContent=`✘ Jawabanmu belum tepat. Kuis ${quizName[prefix]} harus diulang dari awal.`;
-    $(prefix+'_hint').innerHTML=`<div class="hintbox">💡 Petunjuk: ${esc(it.h||'Baca ulang materi dan catatanmu.')}<br>Setelah membaca ulang, tekan tombol di bawah. Soal dan pilihan jawaban akan diacak.</div>`;
-    btn.textContent='🔄 Ulangi Kuis dari Awal'; btn.classList.add('red');
+    fb.textContent=`âœ˜ Jawabanmu belum tepat. Kuis ${quizName[prefix]} harus diulang dari awal.`;
+    $(prefix+'_hint').innerHTML=`<div class="hintbox">ðŸ’¡ Petunjuk: ${esc(it.h||'Baca ulang materi dan catatanmu.')}<br>Setelah membaca ulang, tekan tombol di bawah. Soal dan pilihan jawaban akan diacak.</div>`;
+    btn.textContent='ðŸ”„ Ulangi Kuis dari Awal'; btn.classList.add('red');
     btn.onclick=()=>mulaiKuis(prefix);
-    $('skor-'+prefix).textContent=`Percobaan ke-${run.tries} belum berhasil • ulangi dari soal 1`;
+    $('skor-'+prefix).textContent=`Percobaan ke-${run.tries} belum berhasil â€¢ ulangi dari soal 1`;
   }
 }
 
@@ -1217,18 +1298,18 @@ async function aktifkanKamera(){
     const stream = await navigator.mediaDevices.getUserMedia({video:true});
     $('floating-cam').srcObject=stream;
     $('floating-cam').style.display='block'; $('cam-label').style.display='block';
-    const b=$('btn-kamera'); b.textContent='✔️ Kamera Pengawas Terverifikasi'; b.classList.add('green'); b.disabled=true;
+    const b=$('btn-kamera'); b.textContent='âœ”ï¸ Kamera Pengawas Terverifikasi'; b.classList.add('green'); b.disabled=true;
     $('form-data-diri').style.display='block';
     S.kamera=true;
   }catch(err){
-    showModal({icon:'📷',title:'Kamera Diperlukan',body:'PJJ wajib mengizinkan akses kamera agar ujian dapat diawasi. Periksa izin kamera di browser, lalu coba lagi.'});
+    showModal({icon:'ðŸ“·',title:'Kamera Diperlukan',body:'PJJ wajib mengizinkan akses kamera agar ujian dapat diawasi. Periksa izin kamera di browser, lalu coba lagi.'});
   }
 }
 
 function mulaiApersepsi(){
   S.nama=$('nama-siswa').value.trim(); S.kelas=$('kelas-siswa').value;
-  if(S.nama.length<3||!S.kelas){ showModal({icon:'✍️',title:'Data belum lengkap',body:'Isi nama lengkap dan pilih kelas terlebih dahulu.'}); return; }
-  $('student-info').textContent=`👤 ${S.nama} • Kelas ${S.kelas}`;
+  if(S.nama.length<3||!S.kelas){ showModal({icon:'âœï¸',title:'Data belum lengkap',body:'Isi nama lengkap dan pilih kelas terlebih dahulu.'}); return; }
+  $('student-info').textContent=`ðŸ‘¤ ${S.nama} â€¢ Kelas ${S.kelas}`;
   $('hud').style.display='block';
   S.aktif=true;
   pasangWatermark();
@@ -1238,7 +1319,7 @@ function mulaiApersepsi(){
 
 function lanjutMateri(){
   for(let i=0;i<diagData.length;i++){
-    if(!document.querySelector(`input[name="diag${i}"]:checked`)){ showModal({icon:'📝',title:'Belum lengkap',body:`Soal nomor ${i+1} belum dijawab. Jawab ke-10 soal dulu ya!`}); return; }
+    if(!document.querySelector(`input[name="diag${i}"]:checked`)){ showModal({icon:'ðŸ“',title:'Belum lengkap',body:`Soal nomor ${i+1} belum dijawab. Jawab ke-10 soal dulu ya!`}); return; }
   }
   tambahXP(10);
   renderKuis(kuisA,'kuis-a-container','qa');
@@ -1258,11 +1339,11 @@ function mulaiTimerMateri(){
     const now=Date.now(), dt=(now-last)/1000; last=now;
     if(document.hidden) return;
     sisaMateri-=Math.min(dt,2);
-    $('timer-text').textContent=`⏳ Wajib membaca & mencatat: ${fmt(sisaMateri)}`;
+    $('timer-text').textContent=`â³ Wajib membaca & mencatat: ${fmt(sisaMateri)}`;
     $('timer-bar').style.width=((CONFIG.WAKTU_MATERI-sisaMateri)/CONFIG.WAKTU_MATERI*100)+'%';
     if(sisaMateri<=0){
       clearInterval(timerMateri); materiSelesai=true;
-      $('timer-text').textContent='✅ Waktu selesai! Pastikan catatan sudah lengkap dan semua kuis tuntas.';
+      $('timer-text').textContent='âœ… Waktu selesai! Pastikan catatan sudah lengkap dan semua kuis tuntas.';
       $('timer-materi').classList.add('ok');
       cekTombolMateri();
     }
@@ -1275,97 +1356,148 @@ function cekTombolMateri(){
 }
 
 function kumpulkanSemuaKuis(){
-  if(!$('cek-catatan').checked){ showModal({icon:'✍️',title:'Catatan belum dibuat',body:'Buat ringkasan materi di buku catatanmu, lalu centang pernyataan di atas.'}); return; }
+  if(!$('cek-catatan').checked){ showModal({icon:'âœï¸',title:'Catatan belum dibuat',body:'Buat ringkasan materi di buku catatanmu, lalu centang pernyataan di atas.'}); return; }
   const kurang=['qa','qb','qc'].filter(p=>!quizDone[p]).map(p=>'Bagian '+p[1].toUpperCase());
-  if(kurang.length){ showModal({icon:'📝',title:'Kuis belum tuntas',body:'Kuis berikut belum tuntas (kelima soal harus benar dalam satu percobaan): <b>'+kurang.join(', ')+'</b>.'}); return; }
-  showModal({icon:'🎉',title:'Materi Selesai!',body:'Luar biasa! Sekarang saatnya praktik di laboratorium simulasi.',ok:'Lanjut Simulasi ➔',onOk:()=>showStep('step-simulasi')});
+  if(kurang.length){ showModal({icon:'ðŸ“',title:'Kuis belum tuntas',body:'Kuis berikut belum tuntas (kelima soal harus benar dalam satu percobaan): <b>'+kurang.join(', ')+'</b>.'}); return; }
+  showModal({icon:'ðŸŽ‰',title:'Materi Selesai!',body:'Luar biasa! Sekarang saatnya praktik di laboratorium simulasi.',ok:'Lanjut Simulasi âž”',onOk:()=>showStep('step-simulasi')});
 }
 
 function bukaSimulasi(){
   if($('kode-simulasi').value.trim()===CONFIG.KODE_SIMULASI){
     $('lock-simulasi').style.display='none'; $('konten-simulasi').style.display='block';
+    if(!sim.started){ renderKasus(); renderHasilData(); sim.started=true; }
   } else { $('error-simulasi').style.display='block'; }
 }
 
-/* ---------------- SIMULASI ---------------- */
-const sim={k:new Set(), d:{}, p:false};
-function tandaiSim(id){ const el=$(id); if(!el.classList.contains('done')){ el.classList.add('done'); tambahXP(20); } cekSimulasiLengkap(); }
+/* ---------------- SIMULASI TERPANDU ---------------- */
+const sim={k:new Set(), privacyIndex:0, dataRun:new Set(), evidence:new Set(), started:false};
+function feedbackSim(id,text,kind='retry'){
+  const el=$(id); el.textContent=text; el.className='sim-feedback '+kind;
+}
+function tandaiSim(id){
+  const el=$(id);
+  if(!el.classList.contains('done')){ el.classList.add('done'); tambahXP(20); }
+  cekSimulasiLengkap();
+}
 function cekSimulasiLengkap(){
-  const selesai = $('sim1').classList.contains('done') && $('sim2').classList.contains('done') && $('sim3').classList.contains('done');
-  if(selesai){ const b=$('btn-lanjut-formatif'); b.disabled=false; b.textContent='🎯 Semua Simulasi Selesai, Lanjut Ujian Akhir ➔'; b.classList.add('green'); }
+  const ids=['sim1','sim2','sim3'];
+  const count=ids.filter(id=>$(id).classList.contains('done')).length;
+  ids.forEach((id,i)=>$('sim-nav'+(i+1)).classList.toggle('finished',$(id).classList.contains('done')));
+  $('sim-total').textContent=count===3?'3 dari 3 simulasi tuntas. Kamu siap melanjutkan ke ujian.':`${count} dari 3 simulasi tuntas. Selesaikan bagian yang belum bertanda tuntas.`;
+  const btn=$('btn-lanjut-formatif'); btn.disabled=count!==3;
+  btn.textContent=count===3?'Semua simulasi tuntas Â· Lanjut Ujian Akhir âž”':`ðŸ”’ ${3-count} simulasi lagi untuk membuka ujian`;
+  btn.classList.toggle('green',count===3);
 }
 
-/* Simulasi 1: lindungi data pribadi */
+/* Simulasi 1: keputusan -> perbaikan yang tampak -> kasus berikutnya. */
 const kasus=[
-  {ai:"Kamu mengetik: \"Tolong jelaskan perbedaan sel hewan dan sel tumbuhan.\"", aman:true, info:"Ini pertanyaan umum tanpa data pribadi, jadi aman."},
-  {ai:"Kamu mengetik: \"Buatkan surat izin. Nama: Rina Putri, NIK 1371xxxxxxxxxxxx, alamat Jl. Merdeka No. 5, HP 0812-xxxx.\"", aman:false, info:"NIK, alamat, dan nomor HP adalah data pribadi. Samarkan dengan [NAMA], [NIK], [ALAMAT], lalu isi sendiri di dokumen akhir."},
-  {ai:"Kamu mengunggah foto KTP-mu dan berkata: \"Ubah ini jadi stiker lucu.\"", aman:false, info:"Foto KTP memuat data pribadi sensitif (wajah, NIK, alamat). Jangan pernah diunggah ke aplikasi KA."},
-  {ai:"Kamu mengetik: \"Kata sandi email sekolahku budi2010. Menurutmu sudah kuat belum?\"", aman:false, info:"Kata sandi tidak boleh dibagikan kepada siapa pun, termasuk KA. Tanyakan saja ciri kata sandi yang kuat secara umum."}
+  {ai:'Bantu jelaskan mengapa daun membutuhkan cahaya matahari.',aman:true,
+   hint:'Periksa lagi: apakah ada identitas seseorang atau rahasia akun dalam permintaan ini?',
+   safe:'Bantu jelaskan mengapa daun membutuhkan cahaya matahari.',info:'Pertanyaan pelajaran ini tidak memuat data pribadi. Teksnya boleh dipakai untuk latihan.'},
+  {ai:'Bantu rapikan surat izin. Nama saya Rani Contoh, tinggal di Jalan Contoh No. 12, nomor HP 08xx-1234.',aman:false,
+   hint:'Ada nama, alamat, dan nomor HP. Apakah chatbot memerlukan identitas itu untuk merapikan bahasa surat?',
+   safe:'Bantu rapikan surat izin. Nama: [NAMA], alamat: [ALAMAT], nomor HP: [NOMOR HP].',info:'Ganti identitas dengan penanda. Isi data asli sendiri pada surat akhir, setelah selesai memakai chatbot.'},
+  {ai:'Buat jadwal belajar tiga hari untuk Matematika dan IPA, masing-masing 30 menit.',aman:true,
+   hint:'Jadwal ini hanya menyebut mata pelajaran dan durasi, tanpa nama, alamat, atau rahasia akun.',
+   safe:'Buat jadwal belajar tiga hari untuk Matematika dan IPA, masing-masing 30 menit.',info:'Nama mata pelajaran dan durasi belajar tidak mengenali seseorang. Tidak ada data pribadi yang perlu disamarkan di sini.'},
+  {ai:'Kata sandi emailku ContohSaja!123. Tolong nilai apakah kata sandi itu kuat.',aman:false,
+   hint:'Kata sandi adalah rahasia akses. Bisakah kamu menanyakan cirinya tanpa menyebut kata sandi asli?',
+   safe:'Apa ciri kata sandi yang kuat dan unik? Jangan minta kata sandi asli saya.',info:'Hapus kata sandi dari permintaan. Jika kata sandi asli sudah terlanjur dibagikan, segera ganti melalui layanan resminya.'}
 ];
 function renderKasus(){
-  $('kasus-container').innerHTML=kasus.map((k,i)=>
-    `<div class="kasus"><div class="ai">⌨️ ${esc(k.ai)}</div>
-      <div class="acts"><button id="kp${i}" onclick="pilihKasus(${i},'aman')">✅ Aman diketik</button><button id="kv${i}" onclick="pilihKasus(${i},'lindungi')">🔒 Lindungi dulu</button></div>
-      <div class="res" id="kr${i}"></div></div>`).join('');
+  const i=sim.privacyIndex, k=kasus[i];
+  $('kasus-container').innerHTML=`<p class="sim-progress" id="privacy-progress">Kasus ${i+1} dari ${kasus.length} Â· ${sim.k.size} keputusan tepat</p>
+    <div class="sim-task"><p><b>Rencana permintaan ke chatbot:</b></p><div class="prompt-paper">${esc(k.ai)}</div>
+    <p>Apakah teks ini boleh dipakai atau perlu diubah dahulu?</p>
+    <div class="choice-row"><button class="action-btn" id="privacy-safe" onclick="pilihKasus('aman')">Boleh dipakai</button><button class="action-btn" id="privacy-protect" onclick="pilihKasus('lindungi')">Perlu diubah</button></div>
+    <div class="sim-feedback" id="privacy-feedback" role="status"></div>
+    <div id="privacy-preview" hidden><p style="margin-top:14px"><b>Versi aman untuk dipakai:</b></p><div class="prompt-paper safe" id="privacy-safe-text"></div></div>
+    <button class="btn-mini" id="privacy-next" onclick="lanjutKasus()" hidden>Kasus berikutnya âž”</button></div>`;
 }
-function pilihKasus(i,aksi){
-  if(sim.k.has(i)) return;
-  const k=kasus[i], r=$('kr'+i);
-  $('kp'+i).disabled=true; $('kv'+i).disabled=true;
-  let teks, warna;
-  if(aksi==='lindungi' && !k.aman){ teks='✔ Tepat! Kamu melindungi datamu. '+k.info; warna='#047857'; }
-  else if(aksi==='aman' && k.aman){ teks='✔ Tepat! '+k.info; warna='#047857'; }
-  else if(aksi==='lindungi'){ teks='⚠ Terlalu berhati-hati. '+k.info; warna='#b45309'; }
-  else { teks='❌ Berbahaya! '+k.info; warna='#b91c1c'; }
-  r.textContent=teks; r.style.color=warna; r.style.display='block';
+function pilihKasus(aksi){
+  const i=sim.privacyIndex,k=kasus[i];
+  if(sim.k.has(i)||!['aman','lindungi'].includes(aksi)) return;
+  if((aksi==='aman')!==k.aman){feedbackSim('privacy-feedback','Belum tepat. '+k.hint+' Pilih lagi.');return;}
   sim.k.add(i);
+  $('privacy-safe').disabled=true; $('privacy-protect').disabled=true;
+  $(k.aman?'privacy-safe':'privacy-protect').classList.add('picked');
+  feedbackSim('privacy-feedback','Tepat. '+k.info,'success');
+  $('privacy-safe-text').textContent=k.safe; $('privacy-preview').hidden=false;
+  $('privacy-progress').textContent=`Kasus ${i+1} dari ${kasus.length} Â· ${sim.k.size} keputusan tepat`;
   if(sim.k.size===kasus.length){
-    $('hasil-sim1').textContent='🎯 Kesimpulan: sebelum mengetik ke KA, periksa dulu apakah ada data pribadi. Samarkan atau jangan dimasukkan.';
-    $('hasil-sim1').style.color='#047857';
-    tandaiSim('sim1');
+    feedbackSim('hasil-sim1','Tuntas! Kamu memeriksa 4 permintaan. Pertahankan pertanyaan umum, samarkan identitas, dan hapus rahasia akses. +20 XP','success');
+    $('next-sim1').hidden=false; tandaiSim('sim1');
+  } else $('privacy-next').hidden=false;
+}
+function lanjutKasus(){
+  if(!sim.k.has(sim.privacyIndex)||sim.privacyIndex>=kasus.length-1)return;
+  sim.privacyIndex++;renderKasus();
+  $('privacy-safe').focus({preventScroll:true});
+}
+
+/* Hasil ilustrasi tetap. Rekap dihitung langsung dari prediksi yang ditampilkan. */
+const bendaUji=[
+  {nama:'Botol plastik',jenis:'Plastik',a:'Plastik',b:'Plastik'},
+  {nama:'Kantong plastik',jenis:'Plastik',a:'Plastik',b:'Plastik'},
+  {nama:'Sendok plastik',jenis:'Plastik',a:'Plastik',b:'Plastik'},
+  {nama:'Penggaris plastik',jenis:'Plastik',a:'Plastik',b:'Kertas'},
+  {nama:'Tutup botol plastik',jenis:'Plastik',a:'Plastik',b:'Plastik'},
+  {nama:'Koran kertas',jenis:'Kertas',a:'Kertas',b:'Kertas'},
+  {nama:'Amplop kertas',jenis:'Kertas',a:'Plastik',b:'Kertas'},
+  {nama:'Kardus kertas',jenis:'Kertas',a:'Plastik',b:'Kertas'},
+  {nama:'Kantong kertas',jenis:'Kertas',a:'Plastik',b:'Plastik'},
+  {nama:'Lembar kertas',jenis:'Kertas',a:'Plastik',b:'Kertas'}
+];
+function hasilModel(model,jenis){return bendaUji.filter(x=>(!jenis||x.jenis===jenis)&&x[model]===x.jenis).length;}
+function renderHasilData(){
+  $('data-test-body').innerHTML=bendaUji.map(x=>`<tr><th scope="row">${esc(x.nama)}<br><small>${esc(x.jenis)}</small></th>${['a','b'].map(m=>sim.dataRun.has(m)?`<td class="${x[m]===x.jenis?'hit':'miss'}">${x[m]===x.jenis?'âœ“':'âœ—'} ${esc(x[m])}</td>`:'<td>Belum diuji</td>').join('')}</tr>`).join('');
+  $('data-test-summary').innerHTML=[['Plastik benar','Plastik',5],['Kertas benar','Kertas',5],['Total benar',null,10]].map(([label,jenis,total])=>`<tr><th scope="row">${label}</th>${['a','b'].map(m=>`<td>${sim.dataRun.has(m)?hasilModel(m,jenis)+' dari '+total:'â€”'}</td>`).join('')}</tr>`).join('');
+}
+function ujiModel(model){
+  if(!['a','b'].includes(model)||sim.dataRun.has(model)||(model==='b'&&!sim.dataRun.has('a')))return;
+  sim.dataRun.add(model); renderHasilData();
+  $('run-data-'+model).disabled=true; $('run-data-'+model).textContent=`âœ“ Model ${model.toUpperCase()} sudah diuji`;
+  if(model==='a'){
+    $('run-data-b').disabled=false; $('run-data-b').textContent='2. Uji model B';
+    $('data-progress').textContent='Langkah 2 dari 3: A benar 5 dari 5 plastik, tetapi hanya 1 dari 5 kertas. Sekarang uji B.';
+  } else {
+    $('data-decision').disabled=false;
+    $('data-progress').textContent='Langkah 3 dari 3: bandingkan rekap. A: plastik 5/5, kertas 1/5. B: plastik 4/5, kertas 4/5. Pilih simpulan di bawah.';
   }
 }
-
-/* Simulasi 2: kualitas data */
-function simulasiData(){
-  const v=$('sim-data').value, h=$('hasil-sim-data');
-  const data={sedikit:[35,30], timpang:[80,35], bersih:[94,90]};
-  const [a,b]=data[v];
-  $('bars-data').style.display='block';
-  const fa=$('f-a'), fb=$('f-b');
-  [fa,fb].forEach(x=>{x.style.width='0';x.className='fill';x.textContent='';});
-  setTimeout(()=>{
-    [[fa,a],[fb,b]].forEach(([el,n])=>{ el.style.width=n+'%'; el.textContent=n+'%'; el.classList.add(n<50?'low':(n<80?'mid':'')); if(n>=80) el.classList.remove('mid','low'); });
-  },60);
-  if(v==='sedikit'){ h.textContent='❌ Data sedikit dan berantakan: KA belajar pola yang keliru, akurasinya rendah.'; h.style.color='#b91c1c'; }
-  else if(v==='timpang'){ h.textContent='⚠️ Akurasi umum tampak tinggi karena sebagian besar sampah adalah plastik, tetapi KA sering salah pada jenis lain. Data tidak seimbang menimbulkan bias.'; h.style.color='#b45309'; }
-  else { h.textContent='✔️ Data bersih, lengkap, dan seimbang: akurasi tinggi dan adil untuk semua jenis sampah.'; h.style.color='#047857'; }
-  sim.d[v]=true;
-  if(!(sim.d.sedikit&&sim.d.timpang&&sim.d.bersih)){ h.textContent+=' Coba dataset lain yang belum dicoba!'; }
-  else tandaiSim('sim2');
+function simpulkanData(){
+  if(sim.dataRun.size!==2||$('sim2').classList.contains('done'))return;
+  const pick=document.querySelector('input[name="data-conclusion"]:checked');
+  if(!pick){feedbackSim('hasil-sim-data','Pilih satu simpulan terlebih dahulu.');return;}
+  if(pick.value!=='b'){feedbackSim('hasil-sim-data','Bandingkan baris â€œPlastik benarâ€ dan â€œKertas benarâ€. Merata berarti kemampuan pada kedua jenis tidak terpaut jauh. Coba pilih lagi.');return;}
+  feedbackSim('hasil-sim-data','Tepat. Pada uji ini A benar 5/5 plastik dan 1/5 kertas, sedangkan B 4/5 pada masing-masing jenis. Contoh kertas yang lebih terwakili membantu B mengenali kertas. B masih salah pada dua benda, jadi hasil KA tetap perlu diperiksa. +20 XP','success');
+  $('data-progress').textContent='3 dari 3 langkah selesai. Kamu sudah membandingkan hasil kedua model.';
+  $('data-decision').disabled=true; $('check-data').textContent='âœ“ Simpulan tepat';
+  $('next-sim2').hidden=false; tandaiSim('sim2');
 }
 
-/* Simulasi 3: detektif artefak */
-const art={found:new Set(), total:5};
-function klikArtefak(el){
-  const id=el.dataset.id, an=el.dataset.an==='1';
-  const out=$('art-msg');
-  out.textContent=el.dataset.msg;
-  out.style.color=an?'#047857':'#64748b';
-  if(an && !art.found.has(id)){
-    art.found.add(id);
-    document.querySelectorAll('#art-svg .hs[data-id="'+id+'"]').forEach(x=>x.classList.add('found'));
-    $('art-count').textContent=`Ditemukan: ${art.found.size} / ${art.total}`;
-    if(art.found.size===art.total){
-      const h=$('hasil-art');
-      h.textContent='🎯 Kesimpulan: gambar ini sangat mungkin buatan atau rekayasa KA, sehingga keterangan “sekolah libur 30 hari” tidak boleh dipercaya begitu saja. Telusuri sumbernya di situs resmi sekolah sebelum membagikannya.';
-      h.style.display='block';
-      if(!sim.p){ sim.p=true; tandaiSim('sim3'); }
-    }
-  }
+/* Simulasi 3: buka bukti yang jelas, bandingkan konteks, lalu putuskan. */
+function bukaBukti(i){
+  if(!Number.isInteger(i)||i<0||i>2)return;
+  sim.evidence.add(i); $('evidence'+i).hidden=false;
+  $('evidence-btn'+i).setAttribute('aria-expanded','true'); $('evidence-mark'+i).textContent='Â· âœ“ sudah dibaca';
+  const n=sim.evidence.size;
+  $('evidence-progress').textContent=n===3?'3 dari 3 bukti diperiksa. Bandingkan tahun 2025 dan 2026, lalu pilih keputusan.':`${n} dari 3 bukti diperiksa. Buka ${3-n} bukti yang belum dibaca.`;
+  if(n===3&&!$('sim3').classList.contains('done'))$('news-decision').disabled=false;
 }
-
-function lanjutFormatifLock(){ showStep('step-formatif'); }
+function putuskanKabar(){
+  if(sim.evidence.size!==3||$('sim3').classList.contains('done'))return;
+  const pick=document.querySelector('input[name="news-conclusion"]:checked');
+  if(!pick){feedbackSim('hasil-kabar','Pilih satu keputusan terlebih dahulu.');return;}
+  if(pick.value!=='hold'){feedbackSim('hasil-kabar','Poster arsip membahas 22 Oktober 2025. Pengumuman terbaru membahas 22 Oktober 2026. Mana yang sesuai dengan tanggal dalam pesan grup? Periksa lagi lalu ubah pilihanmu.');return;}
+  feedbackSim('hasil-kabar','Tepat. Poster lama tidak membuktikan libur tahun ini. Pengumuman resmi terbaru menyebut sekolah tetap masuk. Tahan pesan yang menyesatkan. Bukti ini juga belum dapat memastikan apakah poster dibuat dengan KA; sumber dan kontekslah yang kita periksa. +20 XP','success');
+  $('news-decision').disabled=true; $('check-news').textContent='âœ“ Keputusan tepat';
+  $('evidence-progress').textContent='Bukti sudah dibandingkan dan keputusanmu tepat.'; tandaiSim('sim3');
+}
+function lanjutFormatifLock(){
+  if(!['sim1','sim2','sim3'].every(id=>$(id).classList.contains('done')))return;
+  showStep('step-formatif');
+}
 
 /* ---------------- UJIAN ---------------- */
 let timerUjian=null, akhirUjian=0, urutanUjian=[];
@@ -1386,7 +1518,7 @@ function renderUjian(){
 }
 function jmlTerjawab(){ let n=0; for(let i=0;i<formatifData.length;i++) if(document.querySelector(`input[name="tf_${i}"]:checked`)) n++; return n; }
 function updateTerjawab(){ $('jml-terjawab').textContent=`${jmlTerjawab()} / ${formatifData.length} terjawab`; }
-function updatePelanggaranInfo(){ $('info-pelanggaran').textContent=`⚠ ${S.pelanggaran}/${CONFIG.MAX_PELANGGARAN}`; }
+function updatePelanggaranInfo(){ $('info-pelanggaran').textContent=`âš  ${S.pelanggaran}/${CONFIG.MAX_PELANGGARAN}`; }
 
 function mulaiUjian(){
   S.percobaan++;
@@ -1395,8 +1527,8 @@ function mulaiUjian(){
   clearInterval(timerUjian);
   const tick=()=>{
     const sisa=(akhirUjian-Date.now())/1000;
-    const t=$('timer-ujian'); t.textContent='⏱ '+fmt(sisa); t.classList.toggle('danger',sisa<=300);
-    if(sisa<=0){ clearInterval(timerUjian); showModal({icon:'⌛',title:'Waktu Habis!',body:'Jawabanmu akan dikumpulkan otomatis.',onOk:()=>kumpulkanFormatif()}); }
+    const t=$('timer-ujian'); t.textContent='â± '+fmt(sisa); t.classList.toggle('danger',sisa<=300);
+    if(sisa<=0){ clearInterval(timerUjian); showModal({icon:'âŒ›',title:'Waktu Habis!',body:'Jawabanmu akan dikumpulkan otomatis.',onOk:()=>kumpulkanFormatif()}); }
   };
   tick(); timerUjian=setInterval(tick,500);
   window.scrollTo(0,0);
@@ -1405,29 +1537,29 @@ function mulaiUjian(){
 function konfirmasiKumpul(){
   const kosong=formatifData.length-jmlTerjawab();
   if(kosong>0){
-    showModal({icon:'🤔',title:'Masih ada soal kosong',body:`<b>${kosong}</b> soal belum dijawab. Yakin mau mengumpulkan sekarang?`,ok:'Ya, Kumpulkan',onOk:kumpulkanFormatif,cancel:'Kembali Mengerjakan'});
+    showModal({icon:'ðŸ¤”',title:'Masih ada soal kosong',body:`<b>${kosong}</b> soal belum dijawab. Yakin mau mengumpulkan sekarang?`,ok:'Ya, Kumpulkan',onOk:kumpulkanFormatif,cancel:'Kembali Mengerjakan'});
   } else kumpulkanFormatif();
 }
 
 function motivasiHTML({nilai=0,stat={},curang=false}={}){
   const nm=esc((S.nama||'').trim().split(/\s+/)[0]||'Ananda');
   if(curang){
-    return `<div class="motivasi curang"><h3>🌱 Pesan untuk ${nm}</h3>
+    return `<div class="motivasi curang"><h3>ðŸŒ± Pesan untuk ${nm}</h3>
       <p>Ujian kali ini dibatalkan karena aturan pengawasan dilanggar. Tidak apa-apa, ini bukan akhir segalanya. Nilai yang jujur, sekecil apa pun, jauh lebih berharga daripada nilai tinggi yang diperoleh dengan cara yang tidak benar.</p>
-      <p>Hubungi gurumu, minta kesempatan lagi, dan siapkan diri dengan membaca ulang materi serta mengulang simulasi. Kamu pasti bisa! 💪</p></div>`;
+      <p>Hubungi gurumu, minta kesempatan lagi, dan siapkan diri dengan membaca ulang materi serta mengulang simulasi. Kamu pasti bisa! ðŸ’ª</p></div>`;
   }
   let judul, isi;
   if(nilai>=100){
-    judul=`🏆 Sempurna, ${nm}!`;
+    judul=`ðŸ† Sempurna, ${nm}!`;
     isi='Semua jawabanmu benar! Ini bukti kamu tidak sekadar menghafal, tetapi benar-benar paham pentingnya kualitas data, cara menjaga keamanan data, dan cara menganalisis artefak hasil KA. Pertahankan semangat ini dan ajak temanmu menjadi pengguna KA yang kritis dan bertanggung jawab.';
   } else if(nilai>=90){
-    judul=`🌟 Luar biasa, ${nm}!`;
+    judul=`ðŸŒŸ Luar biasa, ${nm}!`;
     isi='Pemahamanmu sudah sangat kuat. Tinggal sedikit lagi menuju sempurna. Baca penjelasan pada soal yang masih keliru di bawah, lalu kamu siap menjadi pengguna KA yang kritis.';
   } else if(nilai>=CONFIG.KKM){
-    judul=`👏 Hebat, ${nm}! Kamu tuntas!`;
+    judul=`ðŸ‘ Hebat, ${nm}! Kamu tuntas!`;
     isi='Kamu sudah memenuhi KKM dan itu hasil dari usahamu. Manfaatkan penjelasan di bawah untuk memperkuat bagian yang belum tepat, karena kesalahan adalah cara belajar yang paling efektif.';
   } else {
-    judul=`💪 Tetap semangat, ${nm}!`;
+    judul=`ðŸ’ª Tetap semangat, ${nm}!`;
     isi='Terus belajar dan jangan menyerah. Baca kembali materi dan penjelasan jawaban, lalu coba lagi.';
   }
   const kuat=Object.keys(stat).filter(t=>stat[t].s===0);
@@ -1435,16 +1567,16 @@ function motivasiHTML({nilai=0,stat={},curang=false}={}){
   const li=a=>a.map(t=>`<li>${esc(t)}</li>`).join('');
   return `<div class="motivasi"><h3>${judul}</h3><p>${isi}</p>
     <div class="mot-grid">
-      <div class="mot-col"><b>💪 Kekuatanmu</b>${kuat.length?`<ul>${li(kuat)}</ul>`:'Terus berlatih, kekuatanmu akan segera terlihat!'}</div>
-      <div class="mot-col"><b>🎯 Perlu diperkuat</b>${lemah.length?`<ul>${li(lemah)}</ul>`:'Tidak ada. Semua topik sudah kamu kuasai! 🎉'}</div>
+      <div class="mot-col"><b>ðŸ’ª Kekuatanmu</b>${kuat.length?`<ul>${li(kuat)}</ul>`:'Terus berlatih, kekuatanmu akan segera terlihat!'}</div>
+      <div class="mot-col"><b>ðŸŽ¯ Perlu diperkuat</b>${lemah.length?`<ul>${li(lemah)}</ul>`:'Tidak ada. Semua topik sudah kamu kuasai! ðŸŽ‰'}</div>
     </div>
-    <p class="mot-quote">Periksa datanya, lindungi datamu, dan telusuri setiap konten sebelum percaya. Tetap kritis, tetap jujur, dan terus semangat belajar! 🚀</p></div>`;
+    <p class="mot-quote">Periksa datanya, lindungi datamu, dan telusuri setiap konten sebelum percaya. Tetap kritis, tetap jujur, dan terus semangat belajar! ðŸš€</p></div>`;
 }
 
 function kumpulkanFormatif(){
   clearInterval(timerUjian);
   if(S.curang){
-    tampilRapor({nilai:0,lulus:false,curang:true,html:`<div class="feedback-item salah"><b>❌ Ujian dibatalkan:</b> ${esc(S.alasanCurang)}</div>`,motivasi:motivasiHTML({curang:true})});
+    tampilRapor({nilai:0,lulus:false,curang:true,html:`<div class="feedback-item salah"><b>âŒ Ujian dibatalkan:</b> ${esc(S.alasanCurang)}</div>`,motivasi:motivasiHTML({curang:true})});
     return;
   }
   let benar=0, html='';
@@ -1454,14 +1586,14 @@ function kumpulkanFormatif(){
     const u=ans?parseInt(ans.value):-1;
     const tp=it.t||'Umum';
     stat[tp]=stat[tp]||{b:0,s:0};
-    const penj=it.e?`<div class="penjelasan">💡 <b>Penjelasan:</b> ${esc(it.e)}</div>`:'';
+    const penj=it.e?`<div class="penjelasan">ðŸ’¡ <b>Penjelasan:</b> ${esc(it.e)}</div>`:'';
     const tag=`<div class="topik-tag">${esc(tp)}</div>`;
     if(u===it.a){
       benar++; stat[tp].b++;
-      html+=`<div class="feedback-item benar"><b>Soal ${i+1}: ✔️ Benar</b>${tag}${penj}</div>`;
+      html+=`<div class="feedback-item benar"><b>Soal ${i+1}: âœ”ï¸ Benar</b>${tag}${penj}</div>`;
     } else {
       stat[tp].s++;
-      html+=`<div class="feedback-item salah"><b>Soal ${i+1}: ❌ ${u<0?'Tidak dijawab':'Salah'}</b>${tag}`+
+      html+=`<div class="feedback-item salah"><b>Soal ${i+1}: âŒ ${u<0?'Tidak dijawab':'Salah'}</b>${tag}`+
         (u>=0?`<div class="jwb-siswa">Jawabanmu: <i>${esc(it.o[u])}</i></div>`:'')+
         `<div class="jwb-benar">Jawaban benar: <i>${esc(it.o[it.a])}</i></div>${penj}</div>`;
     }
@@ -1469,7 +1601,7 @@ function kumpulkanFormatif(){
   const nilai=Math.round(benar/formatifData.length*100);
 
   if(nilai<CONFIG.KKM){
-    showModal({icon:'💪',title:`Nilaimu ${nilai}`,body:`Belum mencapai KKM (${CONFIG.KKM}). Jangan menyerah, setiap percobaan membuatmu makin paham! Baca lagi materinya, lalu kerjakan <b>remedial</b> dengan urutan opsi yang diacak ulang.`,ok:'Mulai Remedial',onOk:()=>mulaiUjian()});
+    showModal({icon:'ðŸ’ª',title:`Nilaimu ${nilai}`,body:`Belum mencapai KKM (${CONFIG.KKM}). Jangan menyerah, setiap percobaan membuatmu makin paham! Baca lagi materinya, lalu kerjakan <b>remedial</b> dengan urutan opsi yang diacak ulang.`,ok:'Mulai Remedial',onOk:()=>mulaiUjian()});
     return;
   }
   tambahXP(100);
@@ -1482,14 +1614,14 @@ function tampilRapor({nilai,lulus,curang,html,motivasi=''}){
   $('lock-formatif').style.display='none';
   $('konten-formatif').style.display='none';
   $('hasil-akhir').style.display='block';
-  $('cetak-nama').textContent=`${S.nama} • Kelas ${S.kelas}`;
+  $('cetak-nama').textContent=`${S.nama} â€¢ Kelas ${S.kelas}`;
   const box=$('rapor-box'), nl=$('teks-nilai');
   box.classList.toggle('fail',!lulus);
   nl.textContent=nilai; nl.style.color=lulus?'#047857':'#b91c1c';
-  $('rapor-judul').textContent=lulus?'🎓 Rapor Lulus PJJ Koding dan KA':'🚫 Ujian Dibatalkan';
+  $('rapor-judul').textContent=lulus?'ðŸŽ“ Rapor Lulus PJJ Koding dan KA':'ðŸš« Ujian Dibatalkan';
   $('rapor-status').textContent=lulus?`Status: TUNTAS (memenuhi KKM ${CONFIG.KKM})`:'Status: TIDAK TUNTAS - hubungi guru mapel';
   const tgl=new Date().toLocaleString('id-ID',{dateStyle:'long',timeStyle:'short'});
-  $('rapor-meta').innerHTML=`<span>⭐ ${S.xp} XP • ${levelName()}</span><span>🔁 Percobaan ke-${S.percobaan}</span><span>⚠ Pelanggaran: ${S.pelanggaran}</span><span>🗓 ${tgl}</span>`;
+  $('rapor-meta').innerHTML=`<span>â­ ${S.xp} XP â€¢ ${levelName()}</span><span>ðŸ” Percobaan ke-${S.percobaan}</span><span>âš  Pelanggaran: ${S.pelanggaran}</span><span>ðŸ—“ ${tgl}</span>`;
   $('feedback-container').innerHTML=html;
   $('motivasi-box').innerHTML=motivasi;
   S.aktif=false;
@@ -1516,19 +1648,19 @@ document.addEventListener('visibilitychange',()=>{
     updatePelanggaranInfo();
     if(S.pelanggaran>=CONFIG.MAX_PELANGGARAN){
       S.curang=true; S.alasanCurang=`keluar dari halaman ujian sebanyak ${S.pelanggaran} kali.`;
-      showModal({icon:'🚨',title:'Ujian Dibatalkan',body:`Kamu telah keluar dari halaman ujian ${S.pelanggaran} kali. Nilai otomatis 0.`,onOk:kumpulkanFormatif});
+      showModal({icon:'ðŸš¨',title:'Ujian Dibatalkan',body:`Kamu telah keluar dari halaman ujian ${S.pelanggaran} kali. Nilai otomatis 0.`,onOk:kumpulkanFormatif});
     } else {
-      showModal({icon:'🚨',title:'Pelanggaran Terdeteksi',body:`Kamu keluar dari halaman ujian. Pelanggaran <b>${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}</b>. ${S.pelanggaran===CONFIG.MAX_PELANGGARAN-1?'<b style="color:#b91c1c">PERINGATAN TERAKHIR!</b> Sekali lagi keluar, nilaimu langsung 0.':'Jika mencapai batas, nilaimu langsung 0.'}`,ok:'Saya Mengerti'});
+      showModal({icon:'ðŸš¨',title:'Pelanggaran Terdeteksi',body:`Kamu keluar dari halaman ujian. Pelanggaran <b>${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}</b>. ${S.pelanggaran===CONFIG.MAX_PELANGGARAN-1?'<b style="color:#b91c1c">PERINGATAN TERAKHIR!</b> Sekali lagi keluar, nilaimu langsung 0.':'Jika mencapai batas, nilaimu langsung 0.'}`,ok:'Saya Mengerti'});
     }
   } else {
     if(CONFIG.NILAI_NOL_SELURUH_SESI && S.pelanggaran>=CONFIG.MAX_PELANGGARAN){
       S.curang=true; S.alasanCurang=`meninggalkan halaman sebanyak ${S.pelanggaran} kali selama sesi PJJ.`;
-      showModal({icon:'🚨',title:'Sesi Dihentikan',body:`Kamu telah meninggalkan halaman ${S.pelanggaran} kali. Sesuai tata tertib, nilai otomatis <b>0</b>.`,onOk:kumpulkanFormatif});
+      showModal({icon:'ðŸš¨',title:'Sesi Dihentikan',body:`Kamu telah meninggalkan halaman ${S.pelanggaran} kali. Sesuai tata tertib, nilai otomatis <b>0</b>.`,onOk:kumpulkanFormatif});
     } else if(CONFIG.NILAI_NOL_SELURUH_SESI){
       const sisa=CONFIG.MAX_PELANGGARAN-S.pelanggaran;
-      showModal({icon:'⚠️',title:`Pelanggaran ${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}`,body:`Kamu meninggalkan halaman. ${sisa===1?'<b style="color:#b91c1c">PERINGATAN TERAKHIR!</b> Sekali lagi keluar, nilaimu langsung 0.':`Sisa kesempatan: <b>${sisa}</b>. Pada pelanggaran ke-${CONFIG.MAX_PELANGGARAN}, nilaimu langsung 0.`} Waktu baca tidak berjalan saat kamu keluar.`,ok:'Kembali Belajar'});
+      showModal({icon:'âš ï¸',title:`Pelanggaran ${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}`,body:`Kamu meninggalkan halaman. ${sisa===1?'<b style="color:#b91c1c">PERINGATAN TERAKHIR!</b> Sekali lagi keluar, nilaimu langsung 0.':`Sisa kesempatan: <b>${sisa}</b>. Pada pelanggaran ke-${CONFIG.MAX_PELANGGARAN}, nilaimu langsung 0.`} Waktu baca tidak berjalan saat kamu keluar.`,ok:'Kembali Belajar'});
     } else {
-      showModal({icon:'⚠️',title:'Pelanggaran Tercatat',body:'Sistem mencatat kamu meninggalkan halaman. Tetap fokus di halaman ini. Waktu baca tidak berjalan saat kamu keluar.',ok:'Kembali Belajar'});
+      showModal({icon:'âš ï¸',title:'Pelanggaran Tercatat',body:'Sistem mencatat kamu meninggalkan halaman. Tetap fokus di halaman ini. Waktu baca tidak berjalan saat kamu keluar.',ok:'Kembali Belajar'});
     }
   }
 });
@@ -1536,7 +1668,7 @@ document.addEventListener('visibilitychange',()=>{
 function tindakKecurangan(){
   if(dalamUjian()){
     S.curang=true; S.alasanCurang='mencoba menyalin (copy) soal ujian.';
-    showModal({icon:'🚨',title:'Peringatan Keras!',body:'Kamu mencoba menyalin soal. Ujian dibatalkan dan nilai otomatis 0.',onOk:kumpulkanFormatif});
+    showModal({icon:'ðŸš¨',title:'Peringatan Keras!',body:'Kamu mencoba menyalin soal. Ujian dibatalkan dan nilai otomatis 0.',onOk:kumpulkanFormatif});
   }
 }
 function blokir(e){
@@ -1557,7 +1689,7 @@ document.addEventListener('dragstart',e=>e.preventDefault());
 /* ---------------- ANTI SCREENSHOT (penghalang, bukan pemblokir mutlak) ---------------- */
 function pasangWatermark(){
   if(!CONFIG.ANTI_SCREENSHOT) return;
-  const t=`${S.nama} • ${S.kelas} • ${new Date().toLocaleString('id-ID')}`;
+  const t=`${S.nama} â€¢ ${S.kelas} â€¢ ${new Date().toLocaleString('id-ID')}`;
   const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='380' height='230'><text x='20' y='150' transform='rotate(-25 20 150)' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='rgba(79,70,229,0.14)'>${esc(t)}</text></svg>`;
   $('wm').style.backgroundImage=`url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
   $('wm').style.display='block';
@@ -1566,9 +1698,9 @@ function pelanggaranUjian(pesan){
   S.pelanggaran++; updatePelanggaranInfo();
   if(S.pelanggaran>=CONFIG.MAX_PELANGGARAN){
     S.curang=true; S.alasanCurang=pesan+' (batas pelanggaran tercapai).';
-    showModal({icon:'🚨',title:'Ujian Dibatalkan',body:`${pesan}. Pelanggaran mencapai ${S.pelanggaran}. Nilai otomatis 0.`,onOk:kumpulkanFormatif});
+    showModal({icon:'ðŸš¨',title:'Ujian Dibatalkan',body:`${pesan}. Pelanggaran mencapai ${S.pelanggaran}. Nilai otomatis 0.`,onOk:kumpulkanFormatif});
   } else {
-    showModal({icon:'📵',title:'Pelanggaran Terdeteksi',body:`${pesan}. Pelanggaran <b>${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}</b>.`,ok:'Saya Mengerti'});
+    showModal({icon:'ðŸ“µ',title:'Pelanggaran Terdeteksi',body:`${pesan}. Pelanggaran <b>${S.pelanggaran} dari ${CONFIG.MAX_PELANGGARAN}</b>.`,ok:'Saya Mengerti'});
   }
 }
 function lindungiLayar(ms){
